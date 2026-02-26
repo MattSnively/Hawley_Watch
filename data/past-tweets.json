@@ -1,0 +1,138 @@
+{
+  "politician": "josh-hawley",
+  "handle": "@HawleyMO",
+  "lastFetched": "2026-02-25",
+  "tweets": [
+    {
+      "id": "example-001",
+      "url": "https://x.com/HawleyMO/status/example001",
+      "date": "2026-01-13",
+      "text": "Democrats were at the U.S. Supreme Court today pushing for men in women's sports. Meanwhile, President Trump is working to cap credit card rates and stop Wall Street from buying up single-family homes. The Left just doesn't get it",
+      "topics": [
+        "culture-war",
+        "economy"
+      ],
+      "bucket": "receipt",
+      "screenshotPath": "/assets/tweets/2026-01-13-trans-athletes.png",
+      "processed": true,
+      "truthScore": 30,
+      "rating": "misleading",
+      "draftGenerated": true,
+      "draftPath": "drafts/2026-01-13-democrats-were-at-the-us-supreme.md"
+    },
+    {
+      "id": "test-border-001",
+      "url": "https://x.com/HawleyMO/status/test-border-001",
+      "date": "2026-01-10",
+      "text": "The border is a DISASTER. Biden let in millions of illegals and now working Americans are paying the price. Only Trump is serious about securing our border.",
+      "topics": [
+        "immigration"
+      ],
+      "bucket": "receipt",
+      "screenshotPath": null,
+      "processed": false,
+      "truthScore": null,
+      "rating": null,
+      "matchedVotes": [
+        {
+          "voteId": "s4361-2024",
+          "bill": "S.4361",
+          "title": "Bipartisan Border Security Act",
+          "vote": "NO",
+          "date": "2024-02-07",
+          "isContradiction": true,
+          "isConsistent": false,
+          "note": "Hawley regularly tweets about the need for border security but voted against the most significant bipartisan border security legislation in decades."
+        }
+      ],
+      "matchedDonors": [
+        {
+          "type": "industry",
+          "name": "Lawyers/Law Firms",
+          "amount": 473445,
+          "hasHypocrisyAngle": false,
+          "hypocrisyAngle": null
+        }
+      ],
+      "classificationReason": "Receipt: contradicts voting record"
+    },
+    {
+      "id": "test-stock-001",
+      "url": "https://x.com/HawleyMO/status/test-stock-001",
+      "date": "2026-01-08",
+      "text": "Members of Congress should not be allowed to trade stocks. Period. I introduced the PELOSI Act to ban it and I'll keep fighting until it's law.",
+      "topics": [
+        "economy"
+      ],
+      "bucket": "credit",
+      "screenshotPath": null,
+      "processed": false,
+      "truthScore": null,
+      "rating": null,
+      "matchedVotes": [
+        {
+          "voteId": "pelosi-act-2022",
+          "bill": "PELOSI Act",
+          "title": "Preventing Elected Leaders from Owning Securities and Investments Act",
+          "vote": "INTRODUCED",
+          "date": "2022-01-13",
+          "isContradiction": false,
+          "isConsistent": true,
+          "note": "Hawley has consistently pushed this legislation and spoken publicly in support."
+        }
+      ],
+      "matchedDonors": [
+        {
+          "type": "industry",
+          "name": "Securities & Investment",
+          "amount": 833820,
+          "hasHypocrisyAngle": true,
+          "hypocrisyAngle": "Hawley brands himself as a populist fighting Wall Street elites while accepting $833K from the securities and investment industry."
+        }
+      ],
+      "classificationReason": "Consistent with voting record — notably, this position goes against his donor interests"
+    },
+    {
+      "id": "test-noise-001",
+      "url": "https://x.com/HawleyMO/status/test-noise-001",
+      "date": "2026-01-01",
+      "text": "Happy New Year Missouri! God bless our great state and our great country. 2026 is going to be a big year.",
+      "topics": [
+        "missouri"
+      ],
+      "bucket": "noise",
+      "screenshotPath": null,
+      "processed": false,
+      "truthScore": null,
+      "rating": null,
+      "matchedVotes": [],
+      "matchedDonors": [],
+      "classificationReason": "Matched noise pattern (no verifiable claim)"
+    },
+    {
+      "id": "test-lobbyist-001",
+      "url": "https://x.com/HawleyMO/status/test-lobbyist-001",
+      "date": "2026-01-15",
+      "text": "It's time to drain the swamp. Washington lobbyists have too much power and working families have too little. We need to clean up K Street.",
+      "topics": [
+        "economy"
+      ],
+      "bucket": "receipt",
+      "screenshotPath": null,
+      "processed": false,
+      "truthScore": null,
+      "rating": null,
+      "matchedVotes": [],
+      "matchedDonors": [
+        {
+          "type": "industry",
+          "name": "Lobbyists",
+          "amount": 277681,
+          "hasHypocrisyAngle": true,
+          "hypocrisyAngle": "Hawley talks about draining the swamp while accepting $277K from professional lobbyists."
+        }
+      ],
+      "classificationReason": "Receipt: conflicts with donor interests"
+    }
+  ]
+}

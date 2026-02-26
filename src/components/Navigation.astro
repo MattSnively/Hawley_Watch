@@ -1,0 +1,62 @@
+---
+/**
+ * Navigation — Site header with logo, tagline, and main nav bar.
+ * Logo uses serif font: "HAWLEY" in blue, "WATCH" in red.
+ * Nav bar: blue background with white uppercase links, red hover/active state.
+ *
+ * Props:
+ *   currentPath — The current page path, used to highlight the active nav link.
+ */
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+/** Navigation links matching the site map from ROADMAP.md */
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/hawley-watch', label: 'Hawley Watch' },
+  { href: '/money-trail', label: 'Money Trail' },
+  { href: '/voting-record', label: 'Voting Record' },
+  { href: '/impact', label: 'Impact' },
+  { href: '/missouri-watch', label: 'Missouri Watch' },
+  { href: '/about', label: 'About' },
+];
+---
+
+<header class="bg-white border-b border-neutral-200">
+  <!-- Top section: logo and tagline -->
+  <div class="container-site py-5 pb-3 flex items-baseline justify-between flex-wrap gap-3
+              max-md:text-center max-md:justify-center">
+    <div>
+      <a href="/" class="no-underline hover:no-underline">
+        <div class="font-headline text-[2rem] font-bold text-flag-blue tracking-tight">
+          HAWLEY <span class="text-flag-red">WATCH</span>
+        </div>
+      </a>
+      <div class="text-sm text-neutral-500 italic">
+        Tracking what he says vs. what he does
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation bar -->
+  <nav class="bg-flag-blue" aria-label="Main navigation">
+    <div class="container-site flex flex-wrap max-md:justify-center">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            'text-white px-5 py-3 text-sm font-semibold uppercase tracking-wide transition-colors',
+            'hover:bg-flag-red hover:no-underline',
+            { 'bg-flag-red': currentPath === link.href },
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>

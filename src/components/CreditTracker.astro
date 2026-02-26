@@ -1,0 +1,58 @@
+---
+/**
+ * CreditTracker — Sidebar widget listing consistent positions with checkmarks.
+ * Green header. Each entry shows a title, description, and "Consistent" status badge.
+ * Links to the full Credit page for more details.
+ *
+ * Props:
+ *   entries — Array of credit entries from the content collection.
+ */
+
+interface CreditEntry {
+  slug: string;
+  data: {
+    title: string;
+    summary: string;
+    status: string;
+  };
+}
+
+interface Props {
+  entries: CreditEntry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<div class="sidebar-card">
+  <div class="sidebar-card-header green-bg">Credit Where It's Due</div>
+  <div class="sidebar-card-body">
+    <!-- Description -->
+    <p class="text-xs text-neutral-500 mb-3">
+      Positions where Hawley's words match his actions:
+    </p>
+
+    <!-- Credit entry list -->
+    {entries.map((entry) => (
+      <div class="py-2.5 border-b border-neutral-100 last:border-b-0">
+        <div class="font-bold text-sm text-neutral-900">
+          <span class="text-score-mostly-true mr-1">&#10003;</span>
+          {entry.data.title}
+        </div>
+        <div class="text-xs text-neutral-500 mt-0.5">
+          {entry.data.summary.length > 80
+            ? entry.data.summary.slice(0, 80) + '...'
+            : entry.data.summary}
+        </div>
+        <span class="inline-block text-[0.65rem] font-bold px-1.5 py-px bg-green-100 text-green-800 uppercase mt-1">
+          {entry.data.status}
+        </span>
+      </div>
+    ))}
+
+    <!-- Link to full credit page -->
+    <div class="mt-3 text-center">
+      <a href="/credit" class="read-more text-xs">View All Credit Entries &rarr;</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+---
+/**
+ * Individual Post Page — Dynamic route for Hawley Watch blog posts.
+ * Uses PostLayout for the 2-column article + sidebar layout.
+ * Renders the full markdown content of a single post.
+ */
+
+import PostLayout from '../../layouts/PostLayout.astro';
+import { getCollection } from 'astro:content';
+
+/** Generate static paths for all published posts */
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<PostLayout frontmatter={post.data}>
+  <Content />
+</PostLayout>

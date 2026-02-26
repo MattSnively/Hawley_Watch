@@ -1,0 +1,54 @@
+---
+/**
+ * TruthScoreMeter — Colored progress bar showing a truth score (0–100).
+ * Displays: label row (title + badge), progress bar, and numeric score.
+ * Color is determined by the rating: false/misleading/mixed/mostly-true/true.
+ *
+ * Props:
+ *   score  — Numeric truth score (0–100)
+ *   rating — Rating label string matching the truth score color scale
+ */
+
+interface Props {
+  score: number;
+  rating: string;
+}
+
+const { score, rating } = Astro.props;
+
+/**
+ * Map a rating string to the CSS class suffix for badge and fill colors.
+ * Normalizes any casing or whitespace in the rating.
+ */
+const ratingKey = rating.toLowerCase().replace(/\s+/g, '-');
+
+/** Human-readable label for the badge (capitalize each word) */
+const ratingLabel = rating
+  .replace(/-/g, ' ')
+  .replace(/\b\w/g, (c: string) => c.toUpperCase());
+---
+
+<div class="bg-neutral-50 px-5 py-4">
+  <!-- Label row: "Truth Score" title on left, rating badge on right -->
+  <div class="flex justify-between items-center mb-2">
+    <span class="text-xs font-bold uppercase tracking-widest text-neutral-700">
+      Truth Score
+    </span>
+    <span class={`truth-badge truth-badge-${ratingKey}`}>
+      {ratingLabel}
+    </span>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="h-2 bg-neutral-200 rounded overflow-hidden">
+    <div
+      class={`h-full rounded fill-${ratingKey} transition-all duration-300`}
+      style={`width: ${score}%;`}
+    ></div>
+  </div>
+
+  <!-- Numeric score display -->
+  <div class="font-mono text-sm font-semibold text-neutral-700 mt-1">
+    {score} / 100
+  </div>
+</div>

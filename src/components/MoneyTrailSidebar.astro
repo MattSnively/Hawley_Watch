@@ -1,0 +1,54 @@
+---
+/**
+ * MoneyTrailSidebar — Sidebar widget showing top donor industries.
+ * Displays industry name, dollar amount, and a horizontal bar chart
+ * proportional to the largest donation.
+ * Data is loaded from data/donors.json at build time.
+ */
+
+import donorData from '../../data/donors.json';
+
+/** Top 5 industries for the sidebar widget */
+const topIndustries = donorData.industries.slice(0, 5);
+
+/** Largest amount for normalizing bar widths */
+const maxAmount = topIndustries[0]?.amount || 1;
+
+/**
+ * Format a dollar amount to a human-readable string.
+ * Amounts over 1M display as "$X.XXM", otherwise "$XXXK".
+ */
+function formatAmount(amount: number): string {
+  if (amount >= 1_000_000) {
+    return `$${(amount / 1_000_000).toFixed(2)}M`;
+  }
+  return `$${Math.round(amount / 1_000)}K`;
+}
+---
+
+<div class="sidebar-card">
+  <div class="sidebar-card-header">Top Donor Industries</div>
+  <div class="sidebar-card-body">
+    {topIndustries.map((industry) => (
+      <div>
+        <!-- Industry name and amount -->
+        <div class="flex justify-between items-center py-2 border-b border-neutral-100 last:border-b-0 text-sm">
+          <span class="text-neutral-700">{industry.name}</span>
+          <span class="font-bold font-mono text-neutral-900">{formatAmount(industry.amount)}</span>
+        </div>
+        <!-- Proportional bar chart -->
+        <div class="w-full h-1.5 bg-neutral-100 rounded-sm mt-1">
+          <div
+            class="h-full money-bar-fill rounded-sm"
+            style={`width: ${(industry.amount / maxAmount) * 100}%;`}
+          ></div>
+        </div>
+      </div>
+    ))}
+
+    <!-- Link to full Money Trail page -->
+    <div class="mt-3 text-center">
+      <a href="/money-trail" class="read-more text-xs">Full Money Trail &rarr;</a>
+    </div>
+  </div>
+</div>

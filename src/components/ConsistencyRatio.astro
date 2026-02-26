@@ -1,0 +1,75 @@
+---
+/**
+ * ConsistencyRatio — Sidebar widget showing the ratio of consistent
+ * positions vs. receipts vs. noise. Displays a big number (X of Y),
+ * a segmented progress bar, and a color legend.
+ *
+ * Props:
+ *   consistent — Count of positions where words match actions
+ *   receipts   — Count of contradictions (receipts)
+ *   noise      — Count of tweets with no verifiable claim
+ */
+
+interface Props {
+  consistent: number;
+  receipts: number;
+  noise: number;
+}
+
+const { consistent, receipts, noise } = Astro.props;
+
+/** Total analyzed tweets */
+const total = consistent + receipts + noise;
+
+/** Percentages for the segmented bar */
+const consistentPct = total > 0 ? (consistent / total) * 100 : 0;
+const receiptPct = total > 0 ? (receipts / total) * 100 : 0;
+const noisePct = total > 0 ? (noise / total) * 100 : 0;
+
+/** Ratio as a percentage string */
+const ratioStr = total > 0 ? (consistentPct).toFixed(1) + '%' : '0%';
+---
+
+<div class="sidebar-card">
+  <div class="sidebar-card-header red-bg">Hawley's Consistency Ratio</div>
+  <div class="sidebar-card-body text-center">
+    <!-- Big number display: X of Y -->
+    <div class="flex justify-center items-baseline gap-1 mb-2">
+      <span class="font-headline text-[2.5rem] font-bold text-score-misleading leading-none">
+        {consistent}
+      </span>
+      <span class="text-sm text-neutral-500">of</span>
+      <span class="font-headline text-2xl font-bold text-neutral-700 leading-none">
+        {total}
+      </span>
+    </div>
+
+    <!-- Description text -->
+    <div class="text-xs text-neutral-500 mb-2">
+      analyzed tweets match his actions (<strong class="text-score-misleading">{ratioStr}</strong>)
+    </div>
+
+    <!-- Segmented bar -->
+    <div class="h-2.5 bg-neutral-200 rounded-full overflow-hidden flex my-2">
+      <div class="bar-consistent h-full" style={`width: ${consistentPct}%;`}></div>
+      <div class="bar-receipt h-full" style={`width: ${receiptPct}%;`}></div>
+      <div class="bar-noise h-full" style={`width: ${noisePct}%;`}></div>
+    </div>
+
+    <!-- Legend -->
+    <div class="flex justify-center gap-3 text-[0.7rem] text-neutral-500 mt-1">
+      <span>
+        <span class="inline-block w-2 h-2 rounded-full bg-score-mostly-true align-middle mr-0.5"></span>
+        Consistent
+      </span>
+      <span>
+        <span class="inline-block w-2 h-2 rounded-full bg-score-false align-middle mr-0.5"></span>
+        Receipts
+      </span>
+      <span>
+        <span class="inline-block w-2 h-2 rounded-full bg-neutral-300 align-middle mr-0.5"></span>
+        Noise
+      </span>
+    </div>
+  </div>
+</div>

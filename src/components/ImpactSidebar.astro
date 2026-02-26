@@ -1,0 +1,71 @@
+---
+/**
+ * ImpactSidebar — Compact sidebar widget showing Missouri impact KPIs.
+ * Displays one headline metric per category with trend arrows and
+ * a one-line Hawley connection. Links to the full /impact page.
+ * Follows the MoneyTrailSidebar pattern with a red header.
+ */
+
+import impactData from '../../data/missouri-impact.json';
+
+/** Map category IDs to display icons (Unicode symbols for simplicity) */
+const categoryIcons: Record<string, string> = {
+  'cost-of-living': '$',
+  'housing': '\u2302',       /* ⌂ house symbol */
+  'healthcare': '\u2665',    /* ♥ heart */
+  'rights-democracy': '\u2696', /* ⚖ scales */
+};
+
+/** Trend arrow: up = red ▲, down = red ▼, flat = gray ─ */
+function trendArrow(trend: string): { symbol: string; color: string } {
+  if (trend === 'up') return { symbol: '▲', color: 'text-flag-red' };
+  if (trend === 'down') return { symbol: '▼', color: 'text-flag-red' };
+  return { symbol: '─', color: 'text-neutral-400' };
+}
+
+/** Pull the first KPI from each category as the headline metric */
+const categoryRows = impactData.categories.map((cat) => {
+  const kpi = cat.kpis[0];
+  const trend = trendArrow(kpi.trend);
+  return {
+    id: cat.id,
+    name: cat.name,
+    icon: categoryIcons[cat.id] || '•',
+    metric: kpi.metric,
+    value: kpi.value,
+    trend,
+    connection: kpi.hawleyConnection.summary,
+  };
+});
+---
+
+<div class="sidebar-card">
+  <!-- Red header to distinguish from blue-header sidebar widgets -->
+  <div class="sidebar-card-header red-bg">Impact on Missouri</div>
+  <div class="sidebar-card-body">
+    {categoryRows.map((row) => (
+      <div class="py-2.5 border-b border-neutral-100 last:border-b-0">
+        <!-- Category name + value with trend arrow -->
+        <div class="flex justify-between items-center mb-1">
+          <span class="text-sm font-bold text-neutral-800">
+            <span class="mr-1">{row.icon}</span>
+            {row.name}
+          </span>
+          <span class="font-mono font-bold text-sm text-neutral-900">
+            {row.value}
+            <span class={`text-xs ml-0.5 ${row.trend.color}`}>{row.trend.symbol}</span>
+          </span>
+        </div>
+        <!-- One-line Hawley connection -->
+        <p class="text-xs text-neutral-500 leading-snug line-clamp-2">
+          {row.connection}
+        </p>
+      </div>
+    ))}
+
+    <!-- Link to full Impact page -->
+    <div class="mt-3 text-center">
+      <a href="/impact" class="read-more text-xs">Full Missouri Impact &rarr;</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+---
+/**
+ * Footer — Site-wide footer with 3-column grid:
+ *   1. About blurb
+ *   2. Data Sources links
+ *   3. Navigation links
+ * Blue background with white text. Includes First Amendment disclaimer.
+ */
+---
+
+<footer class="bg-flag-blue text-white/70 mt-12">
+  <div class="container-site py-8 grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-10">
+    <!-- About blurb -->
+    <div>
+      <h3 class="text-white text-sm uppercase tracking-widest mb-3">About This Site</h3>
+      <p class="text-sm text-white/60 leading-relaxed">
+        Hawley Watch is an independent political accountability project. We fact-check
+        Senator Josh Hawley's public statements, track his campaign finance data, and
+        connect his words to his voting record. We are not affiliated with any political
+        campaign, party, or organization.
+      </p>
+    </div>
+
+    <!-- Data Sources -->
+    <div>
+      <h3 class="text-white text-sm uppercase tracking-widest mb-3">Data Sources</h3>
+      <ul class="space-y-1.5">
+        <li><a href="https://www.politifact.com" class="text-sm text-white/60 hover:text-white">PolitiFact</a></li>
+        <li><a href="https://www.opensecrets.org" class="text-sm text-white/60 hover:text-white">OpenSecrets.org</a></li>
+        <li><a href="https://www.fec.gov" class="text-sm text-white/60 hover:text-white">FEC.gov</a></li>
+        <li><a href="https://www.govtrack.us" class="text-sm text-white/60 hover:text-white">GovTrack.us</a></li>
+        <li><a href="https://www.congress.gov" class="text-sm text-white/60 hover:text-white">Congress.gov</a></li>
+      </ul>
+    </div>
+
+    <!-- Navigate -->
+    <div>
+      <h3 class="text-white text-sm uppercase tracking-widest mb-3">Navigate</h3>
+      <ul class="space-y-1.5">
+        <li><a href="/hawley-watch" class="text-sm text-white/60 hover:text-white">Hawley Watch</a></li>
+        <li><a href="/money-trail" class="text-sm text-white/60 hover:text-white">Money Trail</a></li>
+        <li><a href="/voting-record" class="text-sm text-white/60 hover:text-white">Voting Record</a></li>
+        <li><a href="/missouri-watch" class="text-sm text-white/60 hover:text-white">Missouri Watch</a></li>
+        <li><a href="/about" class="text-sm text-white/60 hover:text-white">About / Methodology</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bottom bar with copyright and disclaimer -->
+  <div class="border-t border-white/10 text-center text-xs text-white/40 py-4 container-site">
+    &copy; 2026 Hawley Watch. All rights reserved. This is an independent accountability
+    project protected by the First Amendment.
+  </div>
+</footer>

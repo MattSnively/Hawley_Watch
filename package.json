@@ -1,0 +1,33 @@
+{
+  "name": "hawley-watch",
+  "version": "1.0.0",
+  "description": "Political accountability site tracking Josh Hawley's public statements against his voting record and campaign finance data",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "bot": "node scripts/receipts-bot.js",
+    "bot:fetch": "node scripts/fetch-tweets.js",
+    "bot:screenshot": "node scripts/capture-tweet.js",
+    "bot:match": "node scripts/match-contradictions.js",
+    "bot:card": "node scripts/generate-receipt-card.js"
+  },
+  "keywords": [
+    "political-accountability",
+    "fact-check",
+    "missouri"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/rss": "^4.0.15",
+    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.18.0",
+    "astro-seo": "^1.1.0",
+    "playwright": "^1.58.2",
+    "tailwindcss": "^3.4.19"
+  }
+}

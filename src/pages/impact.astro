@@ -1,0 +1,177 @@
+---
+/**
+ * Impact Page — "How Does This Impact You?"
+ * Shows Missouri-specific KPIs organized by category, with explicit connections
+ * to Hawley's votes, donors, and rhetoric. Cross-references votes.json for
+ * related vote details.
+ * Follows the money-trail.astro layout pattern.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { impactData, getVoteById, formatDollars } from '../lib/data';
+
+/** Map category IDs to icons for the hero stat cards */
+const categoryIcons: Record<string, string> = {
+  'cost-of-living': '$',
+  'housing': '\u2302',
+  'healthcare': '\u2665',
+  'rights-democracy': '\u2696',
+};
+
+/** Trend arrow rendering */
+function trendArrow(trend: string): { symbol: string; color: string } {
+  if (trend === 'up') return { symbol: '▲', color: 'text-flag-red' };
+  if (trend === 'down') return { symbol: '▼', color: 'text-flag-red' };
+  return { symbol: '─', color: 'text-neutral-400' };
+}
+
+/** Build hero stats — one headline number per category (first KPI each) */
+const heroStats = impactData.categories.map((cat) => ({
+  name: cat.name,
+  icon: categoryIcons[cat.id] || '•',
+  value: cat.kpis[0].value,
+  metric: cat.kpis[0].metric,
+  trend: cat.kpis[0].trend,
+}));
+---
+
+<BaseLayout title="Impact on Missouri" description="How Senator Hawley's votes, donors, and rhetoric affect Missouri residents — tracked with real data.">
+  <div class="container-site py-8">
+
+    <!-- Page title -->
+    <h1 class="section-header red">How Does This Impact You?</h1>
+    <p class="text-sm text-neutral-600 mb-8 max-w-2xl">
+      Hawley Watch tracks what he says and what he does. This page connects both to
+      what Missouri residents <strong>experience</strong> — using real data on costs,
+      healthcare, housing, and democracy.
+    </p>
+
+    <!-- Hero: 4 stat cards (one per category) -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+      {heroStats.map((stat) => {
+        const trend = trendArrow(stat.trend);
+        return (
+          <div class="text-center p-5 bg-neutral-50 border border-neutral-200 border-t-[3px] border-t-flag-red">
+            <div class="text-2xl mb-1">{stat.icon}</div>
+            <div class="font-headline text-2xl md:text-3xl font-bold leading-none">
+              {stat.value}
+              <span class={`text-sm ml-1 ${trend.color}`}>{trend.symbol}</span>
+            </div>
+            <div class="text-xs uppercase tracking-widest text-neutral-500 mt-1.5">
+              {stat.name}
+            </div>
+            <div class="text-xs text-neutral-400 mt-0.5">{stat.metric}</div>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Category sections -->
+    {impactData.categories.map((category) => {
+      return (
+        <section class="mb-12">
+          <!-- Category header -->
+          <h2 class="section-header">
+            <span class="mr-2">{categoryIcons[category.id] || '•'}</span>
+            {category.name}
+          </h2>
+          <p class="text-sm text-neutral-600 mb-6 max-w-2xl">
+            {category.intro}
+          </p>
+
+          <!-- KPI cards -->
+          <div class="max-w-3xl space-y-6">
+            {category.kpis.map((kpi) => {
+              const trend = trendArrow(kpi.trend);
+              /* Look up the related vote if this KPI references one */
+              const relatedVote = kpi.hawleyConnection.voteId
+                ? getVoteById(kpi.hawleyConnection.voteId)
+                : null;
+
+              return (
+                <div class="border border-neutral-200 bg-white p-5">
+                  <!-- KPI header: metric name + value -->
+                  <div class="flex justify-between items-start mb-3">
+                    <div>
+                      <h3 class="font-bold text-neutral-900 text-base">{kpi.metric}</h3>
+                      <div class="text-xs text-neutral-500 mt-0.5">
+                        Source: <a href={kpi.sourceUrl} class="underline" target="_blank" rel="noopener">{kpi.source}</a>
+                      </div>
+                    </div>
+                    <div class="text-right flex-shrink-0 ml-4">
+                      <div class="font-headline text-2xl font-bold text-neutral-900 leading-none">
+                        {kpi.value}
+                        <span class={`text-sm ml-1 ${trend.color}`}>{trend.symbol}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Missouri vs. national comparison -->
+                  <div class="flex gap-4 mb-4 text-sm">
+                    <div class="bg-neutral-50 px-3 py-2 border border-neutral-200 flex-1">
+                      <div class="text-xs uppercase tracking-wide text-neutral-500 mb-0.5">Missouri</div>
+                      <div class="font-bold font-mono">{kpi.missouri}</div>
+                    </div>
+                    <div class="bg-neutral-50 px-3 py-2 border border-neutral-200 flex-1">
+                      <div class="text-xs uppercase tracking-wide text-neutral-500 mb-0.5">National</div>
+                      <div class="font-bold font-mono">{kpi.national}</div>
+                    </div>
+                  </div>
+
+                  <!-- Hawley Connection callout (red border) -->
+                  <div class="border-2 border-flag-red bg-red-50 p-4 mb-4">
+                    <div class="text-xs font-bold uppercase tracking-wide text-flag-red mb-1">
+                      Hawley Connection
+                    </div>
+                    <p class="text-sm text-neutral-800 leading-relaxed">
+                      {kpi.hawleyConnection.summary}
+                    </p>
+                  </div>
+
+                  <!-- "What this means" explanation -->
+                  <div class="text-sm text-neutral-600 leading-relaxed mb-3">
+                    <span class="font-bold text-neutral-800">What this means: </span>
+                    {kpi.whatThisMeans}
+                  </div>
+
+                  <!-- Related vote cross-reference (if available) -->
+                  {relatedVote && (
+                    <div class="text-xs bg-neutral-50 border border-neutral-200 p-3 mt-3">
+                      <span class="font-bold text-neutral-700">Related Vote: </span>
+                      <a href="/voting-record" class="underline">{relatedVote.title}</a>
+                      <span class={
+                        relatedVote.vote === 'YES' || relatedVote.vote === 'CO-SPONSOR'
+                          ? 'vote-yes' : relatedVote.vote === 'NO' ? 'vote-no'
+                          : 'inline-block text-xs font-bold px-1.5 py-px ml-1 bg-neutral-100 text-neutral-700'
+                      }>
+                        {relatedVote.vote}
+                      </span>
+                      {relatedVote.moImpact && (
+                        <span class="text-neutral-500 ml-1">— {relatedVote.moImpact}</span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      );
+    })}
+
+    <!-- Source citations -->
+    <div class="text-xs text-neutral-500 border-t border-neutral-200 pt-4 mt-8">
+      <p class="font-bold mb-2">Data Sources:</p>
+      <ul class="space-y-1 list-disc list-inside">
+        <li><a href="https://www.bls.gov/cpi/" class="underline">Bureau of Labor Statistics — Consumer Price Index</a></li>
+        <li><a href="https://www.newyorkfed.org/microeconomics/hhdc" class="underline">Federal Reserve Bank of New York — Household Debt</a></li>
+        <li><a href="https://www.nar.realtor/research-and-statistics" class="underline">National Association of Realtors</a></li>
+        <li><a href="https://data.census.gov/" class="underline">U.S. Census Bureau — American Community Survey</a></li>
+        <li><a href="https://www.chartis.com/insights/rural-health-safety-net-index" class="underline">Chartis Center for Rural Health</a></li>
+        <li><a href="https://www.opensecrets.org/races/outside-spending?cycle=2018&id=MOS2&spec=N" class="underline">OpenSecrets — 2018 Missouri Senate Race</a></li>
+        <li><a href="https://www.sos.mo.gov/elections" class="underline">Missouri Secretary of State — Election Data</a></li>
+      </ul>
+      <p class="mt-2">Last updated: {impactData.lastUpdated}</p>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,154 @@
+---
+/**
+ * About Page — Mission statement, methodology summary, data sources, and disclaimer.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About" description="Learn about Hawley Watch: our mission, methodology, data sources, and commitment to accountability.">
+  <div class="container-site py-8 max-w-3xl">
+    <h1 class="section-header">About Hawley Watch</h1>
+
+    <!-- Mission -->
+    <section class="mb-10">
+      <h2 class="font-headline text-xl font-bold text-flag-blue mb-3">Our Mission</h2>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        Hawley Watch is an independent political accountability project. We fact-check Senator
+        Josh Hawley's public statements, track his campaign finance data, and connect his words
+        to his voting record.
+      </p>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        We are not affiliated with any political campaign, party, or organization. We are
+        concerned citizens exercising our First Amendment right to hold elected officials
+        accountable.
+      </p>
+      <p class="text-neutral-700 leading-relaxed">
+        Importantly, we believe in fairness. When Hawley's words match his actions, we say so.
+        Our "Credit Where It's Due" section tracks positions where he has been consistent.
+        Credibility comes from accuracy, not partisanship.
+      </p>
+    </section>
+
+    <!-- Methodology -->
+    <section class="mb-10">
+      <h2 class="font-headline text-xl font-bold text-flag-blue mb-3">Truth Score Methodology</h2>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        Every analyzed statement receives a Truth Score on a 0–100 scale, based on three
+        weighted factors:
+      </p>
+
+      <div class="space-y-4 mb-6">
+        <div class="border border-neutral-200 p-4 bg-white">
+          <div class="font-bold text-neutral-900 mb-1">Factual Accuracy (40%)</div>
+          <p class="text-sm text-neutral-600">
+            Are the specific claims in the statement verifiable and true? We check against
+            primary sources: official records, data, and established reporting.
+          </p>
+        </div>
+        <div class="border border-neutral-200 p-4 bg-white">
+          <div class="font-bold text-neutral-900 mb-1">Intent to Mislead (40%)</div>
+          <p class="text-sm text-neutral-600">
+            Does the statement use misleading framing, false dichotomies, or deliberately
+            inflammatory language? Does it omit the speaker's own relevant history?
+          </p>
+        </div>
+        <div class="border border-neutral-200 p-4 bg-white">
+          <div class="font-bold text-neutral-900 mb-1">Context & Cherry-Picking (20%)</div>
+          <p class="text-sm text-neutral-600">
+            Does the statement leave out crucial context that would change the reader's
+            understanding? Does it present a misleading picture through selective facts?
+          </p>
+        </div>
+      </div>
+
+      <!-- Rating scale -->
+      <h3 class="font-bold text-neutral-900 mb-2">Rating Scale</h3>
+      <div class="space-y-2">
+        <div class="flex items-center gap-3">
+          <span class="truth-badge truth-badge-false w-28 text-center">FALSE</span>
+          <span class="text-sm text-neutral-600">0–25%</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="truth-badge truth-badge-misleading w-28 text-center">MISLEADING</span>
+          <span class="text-sm text-neutral-600">25–50%</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="truth-badge truth-badge-mixed w-28 text-center">MIXED</span>
+          <span class="text-sm text-neutral-600">50–75%</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="truth-badge truth-badge-mostly-true w-28 text-center">MOSTLY TRUE</span>
+          <span class="text-sm text-neutral-600">75–90%</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="truth-badge truth-badge-true w-28 text-center">TRUE</span>
+          <span class="text-sm text-neutral-600">90–100%</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Sources -->
+    <section class="mb-10">
+      <h2 class="font-headline text-xl font-bold text-flag-blue mb-3">Data Sources</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="bg-flag-blue text-white text-left">
+              <th class="px-4 py-2 font-semibold">Type</th>
+              <th class="px-4 py-2 font-semibold">Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-white"><td class="px-4 py-2">Campaign Finance</td><td class="px-4 py-2"><a href="https://www.opensecrets.org" class="underline">OpenSecrets.org</a></td></tr>
+            <tr class="bg-neutral-50"><td class="px-4 py-2">PAC Contributions</td><td class="px-4 py-2"><a href="https://www.fec.gov" class="underline">FEC.gov</a></td></tr>
+            <tr class="bg-white"><td class="px-4 py-2">Voting Record</td><td class="px-4 py-2"><a href="https://www.govtrack.us" class="underline">GovTrack.us</a></td></tr>
+            <tr class="bg-neutral-50"><td class="px-4 py-2">Legislation</td><td class="px-4 py-2"><a href="https://www.congress.gov" class="underline">Congress.gov</a></td></tr>
+            <tr class="bg-white"><td class="px-4 py-2">Fact Checks</td><td class="px-4 py-2"><a href="https://www.politifact.com" class="underline">PolitiFact</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Three-Bucket System -->
+    <section class="mb-10">
+      <h2 class="font-headline text-xl font-bold text-flag-blue mb-3">Classification System</h2>
+      <p class="text-neutral-700 leading-relaxed mb-4">
+        Every analyzed statement is classified into one of three buckets:
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="border-2 border-score-false p-4 bg-white">
+          <div class="font-bold text-score-false text-lg mb-1">Receipt</div>
+          <p class="text-sm text-neutral-600">
+            Contradicted by voting record, donor data, or past statements.
+          </p>
+        </div>
+        <div class="border-2 border-score-mostly-true p-4 bg-white">
+          <div class="font-bold text-score-mostly-true text-lg mb-1">Credit</div>
+          <p class="text-sm text-neutral-600">
+            Consistent with voting record. No contradicting angle found.
+          </p>
+        </div>
+        <div class="border-2 border-neutral-300 p-4 bg-white">
+          <div class="font-bold text-neutral-500 text-lg mb-1">Noise</div>
+          <p class="text-sm text-neutral-600">
+            No verifiable claim. Retweets, holiday greetings, photo ops.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="border-t border-neutral-200 pt-6">
+      <h2 class="font-headline text-xl font-bold text-flag-blue mb-3">Legal Disclaimer</h2>
+      <p class="text-sm text-neutral-500 leading-relaxed">
+        Hawley Watch is an independent accountability project protected by the First Amendment
+        to the United States Constitution. All analysis represents the opinions of the authors
+        based on publicly available data and reporting. We are not affiliated with any political
+        campaign, party, or government entity. All data sources are cited. If you believe any
+        information on this site is inaccurate, please contact us with the specific claim and
+        supporting evidence.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

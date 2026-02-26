@@ -1,0 +1,57 @@
+---
+/**
+ * Credit Where It's Due — Full page listing all consistent positions.
+ * Each entry shows: title, legislation, summary, and status.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const creditEntries = await getCollection('credit');
+---
+
+<BaseLayout title="Credit Where It's Due" description="Positions where Josh Hawley's words match his actions. We give credit where it's earned.">
+  <div class="container-site py-8 max-w-3xl">
+    <h1 class="font-headline text-xl font-bold uppercase tracking-wide pb-2 mb-6"
+        style="color: #16A34A; border-bottom: 3px solid #16A34A;">
+      Credit Where It's Due
+    </h1>
+
+    <p class="text-neutral-700 leading-relaxed mb-8">
+      Accountability means acknowledging when a politician's words match their actions.
+      These are the positions where Senator Hawley has been consistent — where his public
+      statements align with his legislative record. Credibility comes from fairness.
+    </p>
+
+    <!-- Credit entries -->
+    <div class="space-y-6">
+      {creditEntries.map((entry) => (
+        <div class="border-2 border-score-mostly-true p-6 bg-white">
+          <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+            <div>
+              <h2 class="font-headline text-lg font-bold text-neutral-900">
+                <span class="text-score-mostly-true mr-1">&#10003;</span>
+                {entry.data.title}
+              </h2>
+              <div class="text-sm text-neutral-500 mt-0.5">
+                {entry.data.legislation} &middot; {entry.data.date}
+              </div>
+            </div>
+            <span class="inline-block text-xs font-bold px-2 py-0.5 bg-green-100 text-green-800 uppercase">
+              {entry.data.status}
+            </span>
+          </div>
+          <p class="text-sm text-neutral-700 leading-relaxed">
+            {entry.data.summary}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    {creditEntries.length === 0 && (
+      <p class="text-neutral-500 text-center py-12">
+        No credit entries yet.
+      </p>
+    )}
+  </div>
+</BaseLayout>

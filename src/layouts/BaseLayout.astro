@@ -1,0 +1,74 @@
+---
+/**
+ * BaseLayout — Root HTML shell used by every page on the site.
+ * Includes <head> with meta tags, fonts, global CSS, and the
+ * FlagStripe + Navigation + Footer chrome.
+ *
+ * Props:
+ *   title       — Page <title> (appended with " | Hawley Watch")
+ *   description — Meta description for SEO / Open Graph
+ *   ogImage     — Open Graph image URL (optional)
+ */
+
+import FlagStripe from '../components/FlagStripe.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'Tracking what Josh Hawley says vs. what he does. Fact-checks, campaign finance data, and voting record analysis.',
+  ogImage = '/og-default.png',
+} = Astro.props;
+
+/** Resolve the current page path for active nav highlighting */
+const currentPath = new URL(Astro.request.url).pathname;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | Hawley Watch</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={`${title} | Hawley Watch`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Hawley Watch" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} | Hawley Watch`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon placeholder -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+
+  <body class="min-h-screen flex flex-col">
+    <!-- Patriotic stripe at the very top -->
+    <FlagStripe />
+
+    <!-- Site header with logo and navigation -->
+    <Navigation currentPath={currentPath} />
+
+    <!-- Page content injected by child layouts/pages -->
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <!-- Site-wide footer -->
+    <Footer />
+  </body>
+</html>

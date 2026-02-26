@@ -1,0 +1,145 @@
+/* =============================================================================
+   Hawley Watch — Global Styles
+   Translates the mockup CSS custom properties into Tailwind layers.
+   Design source of truth: mock/index.html
+   ============================================================================= */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -----------------------------------------------------------------------------
+   Base layer: CSS custom properties and element defaults
+   ----------------------------------------------------------------------------- */
+@layer base {
+  :root {
+    /* Neutral palette (supplements Tailwind grays) */
+    --gray-50: #FAFAFA;
+    --gray-100: #F5F5F5;
+    --gray-200: #E5E5E5;
+    --gray-300: #D4D4D4;
+    --gray-500: #737373;
+    --gray-700: #404040;
+    --gray-900: #171717;
+  }
+
+  /* Default body typography — sans-serif body font from tailwind config */
+  body {
+    @apply font-body text-neutral-900 bg-white leading-relaxed;
+  }
+
+  /* Default link styles matching mockup */
+  a {
+    @apply text-flag-blue no-underline;
+  }
+  a:hover {
+    @apply underline;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Component layer: reusable patterns from the mockup
+   ----------------------------------------------------------------------------- */
+@layer components {
+  /* Flag stripe — thin red/blue patriotic gradient at top of page */
+  .flag-stripe {
+    height: 4px;
+    background: linear-gradient(90deg, #B31942 0%, #B31942 50%, #0A3161 50%, #0A3161 100%);
+  }
+
+  /* Section headers — newspaper-style section dividers */
+  .section-header {
+    @apply font-headline text-xl font-bold text-flag-blue uppercase tracking-wide;
+    border-bottom: 3px solid #0A3161;
+    @apply pb-2 mb-6;
+  }
+  .section-header.red {
+    @apply text-flag-red;
+    border-bottom-color: #B31942;
+  }
+
+  /* Sidebar card — shared container for sidebar widgets */
+  .sidebar-card {
+    @apply border border-neutral-200 mb-6 bg-white;
+  }
+  .sidebar-card-header {
+    @apply px-4 py-3 text-xs font-bold uppercase tracking-wide bg-flag-blue text-white;
+  }
+  .sidebar-card-header.red-bg {
+    @apply bg-flag-red;
+  }
+  .sidebar-card-header.green-bg {
+    background-color: #16A34A;
+  }
+  .sidebar-card-body {
+    @apply p-4;
+  }
+
+  /* Truth score badge — colored label for rating */
+  .truth-badge {
+    @apply text-xs font-bold px-3 py-0.5 text-white uppercase;
+  }
+  .truth-badge-false { @apply bg-score-false; }
+  .truth-badge-misleading { @apply bg-score-misleading; }
+  .truth-badge-mixed { @apply bg-score-mixed; }
+  .truth-badge-mostly-true { @apply bg-score-mostly-true; }
+  .truth-badge-true { @apply bg-score-true; }
+
+  /* Topic badges — colored tags for post categories */
+  .topic-badge {
+    @apply text-[0.7rem] font-bold uppercase tracking-widest px-2.5 py-0.5 bg-flag-blue text-white;
+  }
+  .topic-badge-culture-war { background-color: #7C3AED; }
+  .topic-badge-economy { @apply bg-flag-red; }
+  .topic-badge-immigration { background-color: #B45309; }
+  .topic-badge-democracy { @apply bg-flag-blue; }
+  .topic-badge-tech { background-color: #0891B2; }
+  .topic-badge-healthcare { background-color: #059669; }
+  .topic-badge-foreign-policy { background-color: #4338CA; }
+  .topic-badge-missouri { background-color: #9333EA; }
+
+  /* Vote result badges */
+  .vote-yes {
+    @apply inline-block text-[0.7rem] font-bold px-1.5 py-px ml-1;
+    background-color: #DCFCE7;
+    color: #166534;
+  }
+  .vote-no {
+    @apply inline-block text-[0.7rem] font-bold px-1.5 py-px ml-1;
+    background-color: #FEE2E2;
+    color: #991B1B;
+  }
+
+  /* Read more link — red uppercase call to action */
+  .read-more {
+    @apply text-sm font-bold text-flag-red uppercase tracking-wide;
+  }
+  .read-more:hover {
+    @apply underline text-flag-red;
+  }
+
+  /* Max-width content wrapper used across all major sections */
+  .container-site {
+    @apply max-w-[1200px] mx-auto px-6;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Utility layer: one-off helpers Tailwind doesn't cover
+   ----------------------------------------------------------------------------- */
+@layer utilities {
+  /* Truth score bar fill colors */
+  .fill-false { background-color: #DC2626; }
+  .fill-misleading { background-color: #EA580C; }
+  .fill-mixed { background-color: #CA8A04; }
+  .fill-mostly-true { background-color: #16A34A; }
+  .fill-true { background-color: #059669; }
+
+  /* Consistency bar segment colors */
+  .bar-consistent { background-color: #16A34A; }
+  .bar-receipt { background-color: #DC2626; }
+  .bar-noise { background-color: #D4D4D4; }
+
+  /* Money trail bar */
+  .money-bar-fill { background-color: #B31942; }
+}

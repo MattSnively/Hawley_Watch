@@ -1,0 +1,104 @@
+{
+  "politician": "josh-hawley",
+  "lastUpdated": "2026-02-25",
+  "source": "GovTrack / Congress.gov",
+  "votes": [
+    {
+      "id": "s4361-2024",
+      "bill": "S.4361",
+      "title": "Bipartisan Border Security Act",
+      "date": "2024-02-07",
+      "vote": "NO",
+      "topic": ["immigration"],
+      "keywords": ["border", "immigration", "asylum", "border agents", "border security", "migrants", "illegal"],
+      "summary": "Bipartisan bill to add 1,500 border agents, tighten asylum rules, and reform immigration processing. Hawley voted NO despite frequent public statements demanding border security.",
+      "contradicts": "Hawley regularly tweets about the need for border security but voted against the most significant bipartisan border security legislation in decades.",
+      "moImpact": "Missouri shares a border with 8 states and is a major transit corridor. Blocking border security reform affects communities along I-44 and I-70."
+    },
+    {
+      "id": "pelosi-act-2022",
+      "bill": "PELOSI Act",
+      "title": "Preventing Elected Leaders from Owning Securities and Investments Act",
+      "date": "2022-01-13",
+      "vote": "INTRODUCED",
+      "topic": ["economy", "democracy"],
+      "keywords": ["stock", "stocks", "trading", "congress", "insider", "pelosi", "stock market"],
+      "summary": "Would ban members of Congress and their spouses from owning or trading individual stocks.",
+      "consistent": true,
+      "consistentNote": "Hawley has consistently pushed this legislation and spoken publicly in support."
+    },
+    {
+      "id": "credit-card-cap-2023",
+      "bill": "S.2023-XXX",
+      "title": "Credit Card Rate Cap Act (Sanders-Hawley)",
+      "date": "2023-06-15",
+      "vote": "CO-SPONSOR",
+      "topic": ["economy"],
+      "keywords": ["credit card", "interest rate", "rate cap", "banks", "wall street", "credit"],
+      "summary": "Bipartisan bill with Bernie Sanders to cap credit card interest rates at 10%. Never reached a floor vote.",
+      "contradicts": "Hawley later praised Trump for proposing the same policy while attacking 'The Left' — the same people who supported his bill.",
+      "moImpact": "Missouri households carry an average of $7,930 in credit card debt. A 10% rate cap could save the typical family hundreds of dollars per year in interest."
+    },
+    {
+      "id": "big-tech-antitrust-2021",
+      "bill": "S.2992",
+      "title": "American Innovation and Choice Online Act",
+      "date": "2021-10-18",
+      "vote": "CO-SPONSOR",
+      "topic": ["tech"],
+      "keywords": ["big tech", "antitrust", "monopoly", "google", "amazon", "facebook", "meta", "apple", "tech companies"],
+      "summary": "Bipartisan antitrust legislation targeting dominant tech platforms.",
+      "consistent": true,
+      "consistentNote": "Hawley has consistently supported Big Tech antitrust measures and voted accordingly."
+    },
+    {
+      "id": "tiktok-ban-2023",
+      "bill": "S.1143",
+      "title": "No TikTok on Government Devices Act",
+      "date": "2023-03-15",
+      "vote": "YES",
+      "topic": ["tech", "foreign-policy"],
+      "keywords": ["tiktok", "china", "chinese", "bytedance", "social media ban", "national security"],
+      "summary": "Banned TikTok from government devices. Part of broader push to restrict Chinese tech.",
+      "consistent": true,
+      "consistentNote": "Hawley has been one of the most vocal senators on TikTok restrictions and has voted consistently."
+    },
+    {
+      "id": "railway-safety-2023",
+      "bill": "S.576",
+      "title": "Railway Safety Act",
+      "date": "2023-03-01",
+      "vote": "CO-SPONSOR",
+      "topic": ["economy", "missouri"],
+      "keywords": ["railroad", "railway", "train", "derailment", "east palestine", "safety", "rail"],
+      "summary": "Bipartisan railway safety bill following East Palestine derailment.",
+      "consistent": true,
+      "consistentNote": "Hawley co-sponsored and publicly advocated for this legislation consistently.",
+      "moImpact": "Missouri has the 6th-most rail miles in the nation. Thousands of freight trains carrying hazardous materials pass through Missouri communities every year."
+    },
+    {
+      "id": "debt-ceiling-2023",
+      "bill": "H.R.3746",
+      "title": "Fiscal Responsibility Act (Debt Ceiling)",
+      "date": "2023-06-01",
+      "vote": "NO",
+      "topic": ["economy"],
+      "keywords": ["debt ceiling", "debt", "deficit", "spending", "fiscal", "default", "government shutdown"],
+      "summary": "Bipartisan deal to raise the debt ceiling and avoid default. Hawley voted NO.",
+      "contradicts": "Hawley has called for fiscal responsibility while voting against the debt ceiling compromise, risking default.",
+      "moImpact": "Missouri's agricultural sector relies heavily on credit markets. A federal default would have spiked interest rates, threatening farms and agribusinesses statewide."
+    },
+    {
+      "id": "citizens-united-2021",
+      "bill": "S.XXX",
+      "title": "Constitutional Amendment to Overturn Citizens United",
+      "date": "2021-01-20",
+      "vote": "INTRODUCED",
+      "topic": ["democracy"],
+      "keywords": ["citizens united", "campaign finance", "dark money", "pac", "super pac", "money in politics"],
+      "summary": "Hawley introduced a constitutional amendment to overturn Citizens United.",
+      "contradicts": "Hawley benefited from $21.2M in spending from the Senate Leadership Fund (McConnell-aligned Super PAC) in 2018 — exactly the kind of spending Citizens United enabled.",
+      "moImpact": "$26.6M in outside money flooded Missouri's 2018 Senate race — more than the candidates raised themselves. Missouri voters' voices were drowned out by national dark money groups."
+    }
+  ]
+}

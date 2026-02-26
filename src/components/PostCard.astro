@@ -1,0 +1,101 @@
+---
+/**
+ * PostCard — Blog post preview card used on the home page and feed pages.
+ * Displays: header (date + topic badges), tweet embed, truth score meter,
+ * title + excerpt, and footer with "Read Full Analysis" link.
+ *
+ * Props:
+ *   post — A content collection entry with frontmatter data and slug.
+ */
+
+import TruthScoreMeter from './TruthScoreMeter.astro';
+import TweetEmbed from './TweetEmbed.astro';
+
+interface Props {
+  post: {
+    slug: string;
+    data: {
+      title: string;
+      date: string;
+      topic: string[];
+      politician: string;
+      truthScore?: number;
+      rating?: string;
+      tweetUrl?: string;
+      excerpt?: string;
+      sources?: string[];
+    };
+  };
+}
+
+const { post } = Astro.props;
+const { data } = post;
+
+/** Format the date for display */
+const displayDate = new Date(data.date).toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+
+/** Build the link URL based on the politician */
+const postUrl = data.politician === 'josh-hawley'
+  ? `/hawley-watch/${post.slug}`
+  : `/missouri-watch/${post.slug}`;
+
+/** Sources display string */
+const sourcesText = data.sources?.length
+  ? `Sources: ${data.sources.join(', ')}`
+  : '';
+---
+
+<article class="border border-neutral-200 mb-6 bg-white">
+  <!-- Header: date and topic badges -->
+  <div class="px-5 py-4 border-b border-neutral-100 flex justify-between items-center flex-wrap gap-2">
+    <time class="text-xs text-neutral-500" datetime={data.date}>
+      {displayDate}
+    </time>
+    <div class="flex gap-1.5 flex-wrap">
+      {data.topic.map((t) => (
+        <span class={`topic-badge topic-badge-${t}`}>
+          {t.replace(/-/g, ' ')}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Simulated tweet embed (for Hawley posts with tweet data) -->
+  {data.tweetUrl && (
+    <TweetEmbed
+      name="Josh Hawley"
+      handle="@HawleyMO"
+      body={data.excerpt || ''}
+      date={displayDate}
+    />
+  )}
+
+  <!-- Truth Score meter (if post has a score) -->
+  {data.truthScore != null && data.rating && (
+    <TruthScoreMeter score={data.truthScore} rating={data.rating} />
+  )}
+
+  <!-- Title and excerpt -->
+  <div class="px-5 py-4">
+    <h3 class="font-headline text-xl font-bold text-neutral-900 leading-tight mb-2">
+      <a href={postUrl} class="hover:text-flag-blue hover:no-underline">
+        {data.title}
+      </a>
+    </h3>
+    {data.excerpt && (
+      <p class="text-sm text-neutral-700 leading-relaxed">
+        {data.excerpt}
+      </p>
+    )}
+  </div>
+
+  <!-- Footer: read more link and sources -->
+  <div class="px-5 py-3 border-t border-neutral-100 flex justify-between items-center">
+    <a href={postUrl} class="read-more">Read Full Analysis &rarr;</a>
+    {sourcesText && (
+      <span class="text-xs text-neutral-500">{sourcesText}</span>
+    )}
+  </div>
+</article>

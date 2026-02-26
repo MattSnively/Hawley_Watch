@@ -1,0 +1,41 @@
+---
+/**
+ * RecentVotes — Sidebar widget showing the most recent votes from votes.json.
+ * Each entry displays the bill name, a YES/NO badge, and a short description.
+ * Links to the full Voting Record page.
+ */
+
+import voteData from '../../data/votes.json';
+
+/** Show the first 3 votes in the sidebar */
+const recentVotes = voteData.votes.slice(0, 3);
+---
+
+<div class="sidebar-card">
+  <div class="sidebar-card-header">Recent Votes</div>
+  <div class="sidebar-card-body">
+    {recentVotes.map((vote) => (
+      <div class="py-2.5 border-b border-neutral-100 last:border-b-0 text-sm">
+        <div>
+          <span class="font-bold text-neutral-900">{vote.bill} — {vote.title}</span>
+          {/* YES/NO badge based on vote value */}
+          {vote.vote === 'YES' && <span class="vote-yes">YES</span>}
+          {vote.vote === 'NO' && <span class="vote-no">NO</span>}
+          {vote.vote !== 'YES' && vote.vote !== 'NO' && (
+            <span class="inline-block text-[0.7rem] font-bold px-1.5 py-px ml-1 bg-neutral-100 text-neutral-600">
+              {vote.vote}
+            </span>
+          )}
+        </div>
+        <div class="text-xs text-neutral-500 mt-0.5">
+          {vote.summary.length > 60 ? vote.summary.slice(0, 60) + '...' : vote.summary}
+        </div>
+      </div>
+    ))}
+
+    <!-- Link to full voting record -->
+    <div class="mt-3 text-center">
+      <a href="/voting-record" class="read-more text-xs">Full Voting Record &rarr;</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+---
+/**
+ * Voting Record — Table of all tracked votes from votes.json.
+ * Shows bill, date, vote (YES/NO badge), contradiction flag,
+ * and links to related blog posts.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { votes } from '../lib/data';
+
+const allVotes = votes.votes;
+---
+
+<BaseLayout title="Voting Record" description="Josh Hawley's voting record: how he votes vs. what he tweets.">
+  <div class="container-site py-8">
+    <h1 class="section-header">Voting Record</h1>
+
+    <p class="text-sm text-neutral-600 mb-8 max-w-2xl">
+      How does Josh Hawley actually vote? This page tracks key votes and compares
+      them to his public rhetoric. Green rows indicate consistent positions.
+      Red flags indicate contradictions.
+    </p>
+
+    <!-- Votes table -->
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="bg-flag-blue text-white text-left">
+            <th class="px-4 py-2 font-semibold">Bill</th>
+            <th class="px-4 py-2 font-semibold">Date</th>
+            <th class="px-4 py-2 font-semibold">Vote</th>
+            <th class="px-4 py-2 font-semibold">Topics</th>
+            <th class="px-4 py-2 font-semibold">Status</th>
+            <th class="px-4 py-2 font-semibold">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {allVotes.map((vote, i) => {
+            const isConsistent = 'consistent' in vote && vote.consistent;
+            const hasContradiction = 'contradicts' in vote && vote.contradicts;
+            const bgClass = isConsistent
+              ? 'bg-green-50'
+              : hasContradiction
+                ? 'bg-red-50'
+                : i % 2 === 0 ? 'bg-white' : 'bg-neutral-50';
+
+            return (
+              <tr class={bgClass}>
+                <td class="px-4 py-3">
+                  <div class="font-bold text-neutral-900">{vote.bill}</div>
+                  <div class="text-xs text-neutral-500">{vote.title}</div>
+                </td>
+                <td class="px-4 py-3 whitespace-nowrap text-neutral-600">{vote.date}</td>
+                <td class="px-4 py-3">
+                  {vote.vote === 'YES' && <span class="vote-yes">YES</span>}
+                  {vote.vote === 'NO' && <span class="vote-no">NO</span>}
+                  {vote.vote !== 'YES' && vote.vote !== 'NO' && (
+                    <span class="inline-block text-[0.7rem] font-bold px-1.5 py-px bg-neutral-100 text-neutral-600">
+                      {vote.vote}
+                    </span>
+                  )}
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex flex-wrap gap-1">
+                    {vote.topic.map((t: string) => (
+                      <span class={`topic-badge topic-badge-${t} text-[0.6rem]`}>
+                        {t.replace(/-/g, ' ')}
+                      </span>
+                    ))}
+                  </div>
+                </td>
+                <td class="px-4 py-3">
+                  {isConsistent && (
+                    <span class="inline-block text-[0.65rem] font-bold px-1.5 py-px bg-green-100 text-green-800 uppercase">
+                      Consistent
+                    </span>
+                  )}
+                  {hasContradiction && (
+                    <span class="inline-block text-[0.65rem] font-bold px-1.5 py-px bg-red-100 text-red-800 uppercase">
+                      Contradiction
+                    </span>
+                  )}
+                </td>
+                <td class="px-4 py-3 text-xs text-neutral-600 max-w-xs">
+                  {vote.summary}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Source citation -->
+    <div class="text-xs text-neutral-500 border-t border-neutral-200 pt-4 mt-8">
+      Data source: <a href="https://www.govtrack.us/congress/members/josh_hawley/412838" class="underline">GovTrack.us</a>
+      and <a href="https://www.congress.gov" class="underline">Congress.gov</a>.
+      Last updated: {votes.lastUpdated}.
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,164 @@
+{
+  "lastUpdated": "2026-02-26",
+  "categories": [
+    {
+      "id": "cost-of-living",
+      "name": "Cost of Living",
+      "icon": "dollar-sign",
+      "intro": "Missouri families are paying more for everyday essentials. While Hawley talks about fighting for working families, his votes tell a different story.",
+      "kpis": [
+        {
+          "id": "grocery-prices",
+          "metric": "Grocery Price Increase (2020-2025)",
+          "value": "25.4%",
+          "trend": "up",
+          "missouri": "25.4%",
+          "national": "23.5%",
+          "source": "Bureau of Labor Statistics, CPI",
+          "sourceUrl": "https://www.bls.gov/cpi/",
+          "hawleyConnection": {
+            "type": "vote",
+            "voteId": "debt-ceiling-2023",
+            "summary": "Voted NO on the debt ceiling deal, risking a federal default that would have spiked interest rates and further increased costs for Missouri families."
+          },
+          "whatThisMeans": "A default would have triggered higher borrowing costs across the economy, driving up prices on everything from groceries to gas. Missouri's agricultural sector, which relies heavily on credit, would have been hit especially hard."
+        },
+        {
+          "id": "credit-card-debt",
+          "metric": "Avg. Household Credit Card Debt",
+          "value": "$7,930",
+          "trend": "up",
+          "missouri": "$7,930",
+          "national": "$8,480",
+          "source": "Federal Reserve Bank of New York, Q3 2025",
+          "sourceUrl": "https://www.newyorkfed.org/microeconomics/hhdc",
+          "hawleyConnection": {
+            "type": "vote",
+            "voteId": "credit-card-cap-2023",
+            "summary": "Co-sponsored a bipartisan credit card rate cap with Bernie Sanders, then used Trump's identical proposal as a partisan talking point to attack 'The Left.'"
+          },
+          "whatThisMeans": "Missouri families carry nearly $8,000 in credit card debt on average. Hawley's rate cap bill could have saved them hundreds per year in interest — but he turned it into a partisan weapon instead of pushing it to a vote."
+        }
+      ]
+    },
+    {
+      "id": "housing",
+      "name": "Housing",
+      "icon": "home",
+      "intro": "Housing costs are squeezing Missouri renters and would-be homeowners. Hawley has introduced no housing affordability legislation while collecting hundreds of thousands from real estate donors.",
+      "kpis": [
+        {
+          "id": "home-prices",
+          "metric": "Median Home Price (MO)",
+          "value": "$259,000",
+          "trend": "up",
+          "missouri": "$259,000",
+          "national": "$412,000",
+          "source": "National Association of Realtors, 2025",
+          "sourceUrl": "https://www.nar.realtor/research-and-statistics",
+          "hawleyConnection": {
+            "type": "donor",
+            "donorIndustry": "Real Estate",
+            "amount": "$738K",
+            "summary": "Received $738K from real estate industry donors while introducing zero legislation to address housing affordability."
+          },
+          "whatThisMeans": "While Missouri homes are cheaper than the national median, prices have risen 38% since 2020. First-time buyers in Kansas City and St. Louis metro areas are increasingly priced out, and Hawley has done nothing to help."
+        },
+        {
+          "id": "rent-burden",
+          "metric": "Renters Spending 30%+ on Housing",
+          "value": "46%",
+          "trend": "up",
+          "missouri": "46%",
+          "national": "50%",
+          "source": "U.S. Census Bureau, American Community Survey 2024",
+          "sourceUrl": "https://data.census.gov/",
+          "hawleyConnection": {
+            "type": "inaction",
+            "summary": "Has introduced no housing affordability legislation during his Senate tenure despite nearly half of Missouri renters being cost-burdened."
+          },
+          "whatThisMeans": "Nearly half of Missouri renters spend more than 30% of their income on housing — the threshold where housing costs are considered a burden. That's money not going to food, healthcare, or savings."
+        }
+      ]
+    },
+    {
+      "id": "healthcare",
+      "name": "Healthcare",
+      "icon": "heart-pulse",
+      "intro": "Missouri's healthcare gaps — from uninsured residents to closing rural hospitals — directly affect families across the state. Hawley's record shows a senator more aligned with health industry donors than patient needs.",
+      "kpis": [
+        {
+          "id": "uninsured-rate",
+          "metric": "Uninsured Rate (MO)",
+          "value": "10.2%",
+          "trend": "up",
+          "missouri": "10.2%",
+          "national": "8.0%",
+          "source": "U.S. Census Bureau, ACS 2024",
+          "sourceUrl": "https://data.census.gov/",
+          "hawleyConnection": {
+            "type": "rhetoric",
+            "summary": "Did not support Missouri's Medicaid expansion (passed by voters in 2020) and has not sponsored legislation to close the coverage gap."
+          },
+          "whatThisMeans": "Over 600,000 Missourians lack health insurance. Missouri's uninsured rate is 28% higher than the national average. Medicaid expansion, which Hawley did not support, has helped but coverage gaps remain."
+        },
+        {
+          "id": "rural-hospitals",
+          "metric": "Rural Hospitals At Risk of Closing",
+          "value": "14",
+          "trend": "up",
+          "missouri": "14 at risk",
+          "national": "700+ nationally",
+          "source": "Chartis Center for Rural Health, 2025",
+          "sourceUrl": "https://www.chartis.com/insights/rural-health-safety-net-index",
+          "hawleyConnection": {
+            "type": "donor",
+            "donorIndustry": "Health",
+            "amount": "$434K",
+            "summary": "Received $434K from health industry donors while 14 rural Missouri hospitals face closure risk."
+          },
+          "whatThisMeans": "When a rural hospital closes, residents must travel 30+ miles for emergency care. Missouri has 14 hospitals at risk — and the senator who receives hundreds of thousands from health industry donors hasn't made rural hospital preservation a priority."
+        }
+      ]
+    },
+    {
+      "id": "rights-democracy",
+      "name": "Rights & Democracy",
+      "icon": "scale",
+      "intro": "Dark money and voter participation are democracy issues that directly affect whose voice gets heard in Missouri. Hawley's record reveals a troubling gap between his reform rhetoric and his actions.",
+      "kpis": [
+        {
+          "id": "outside-money",
+          "metric": "Outside Money in Hawley's 2018 Race",
+          "value": "$26.6M",
+          "trend": "up",
+          "missouri": "$26.6M",
+          "national": "N/A",
+          "source": "OpenSecrets.org, 2018 Missouri Senate Race",
+          "sourceUrl": "https://www.opensecrets.org/races/outside-spending?cycle=2018&id=MOS2&spec=N",
+          "hawleyConnection": {
+            "type": "vote",
+            "voteId": "citizens-united-2021",
+            "summary": "Introduced a constitutional amendment to overturn Citizens United — the very ruling that allowed $26.6M in outside money to flow into his own 2018 Senate race."
+          },
+          "whatThisMeans": "Hawley won his seat with massive outside spending help, then introduced a bill to ban that same type of spending. The bill went nowhere. Missouri voters deserve to know whose money is shaping their elections."
+        },
+        {
+          "id": "voter-turnout",
+          "metric": "Voter Turnout (MO, 2024)",
+          "value": "62.1%",
+          "trend": "down",
+          "missouri": "62.1%",
+          "national": "65.5%",
+          "source": "Missouri Secretary of State, 2024 General Election",
+          "sourceUrl": "https://www.sos.mo.gov/elections",
+          "hawleyConnection": {
+            "type": "rhetoric",
+            "summary": "Objected to certifying the 2020 Electoral College results on January 6, 2021 — undermining confidence in the democratic process Missourians participate in."
+          },
+          "whatThisMeans": "Missouri voter turnout trails the national average. When a senator questions the legitimacy of elections, it can discourage civic participation — the opposite of what a representative should do."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+---
+/**
+ * Hawley Watch — Filterable blog feed of all posts about Josh Hawley.
+ * Shows topic filter buttons at the top and paginated PostCard list.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+// Load all published Hawley posts, sorted by date descending
+const allPosts = await getCollection('posts', ({ data }) => !data.draft && data.politician === 'josh-hawley');
+const sortedPosts = allPosts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+// Gather all unique topics for filter buttons
+const allTopics = [...new Set(sortedPosts.flatMap((p) => p.data.topic))].sort();
+---
+
+<BaseLayout title="Hawley Watch" description="All fact-checks and analyses of Senator Josh Hawley's public statements.">
+  <div class="container-site py-8">
+    <h1 class="section-header">Hawley Watch</h1>
+
+    <!-- Topic filter buttons (client-side filtering via CSS or JS) -->
+    <div class="flex flex-wrap gap-2 mb-8">
+      <span class="text-xs text-neutral-500 uppercase tracking-widest self-center mr-2">Filter:</span>
+      <a href="/hawley-watch" class="topic-badge bg-neutral-800 text-white">All</a>
+      {allTopics.map((topic) => (
+        <span class={`topic-badge topic-badge-${topic} cursor-pointer`}>
+          {topic.replace(/-/g, ' ')}
+        </span>
+      ))}
+    </div>
+
+    <!-- Post feed -->
+    <div class="max-w-3xl">
+      {sortedPosts.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </div>
+
+    {sortedPosts.length === 0 && (
+      <p class="text-neutral-500 text-center py-12">
+        No posts yet. Check back soon for the latest analysis.
+      </p>
+    )}
+  </div>
+</BaseLayout>

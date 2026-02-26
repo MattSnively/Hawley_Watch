@@ -1,0 +1,78 @@
+---
+/**
+ * Missouri Watch — Overview page for expanding accountability beyond Hawley.
+ * Shows politician cards for upcoming Missouri politicians to track.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+// Load MO politician posts (non-Hawley posts)
+const moPosts = await getCollection('posts', ({ data }) =>
+  !data.draft && data.politician !== 'josh-hawley'
+);
+const sortedPosts = moPosts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+/** Missouri politicians being tracked or coming soon */
+const politicians = [
+  {
+    name: 'Sen. Eric Schmitt',
+    title: 'U.S. Senator',
+    description: 'Former Attorney General. Described America as a "white homeland" at the National Conservatism Conference.',
+    status: 'Active',
+  },
+  {
+    name: 'Denny Hoskins',
+    title: 'Secretary of State',
+    description: 'Has had 5 ballot summaries rejected by courts in 4 months for misleading language.',
+    status: 'Active',
+  },
+  {
+    name: 'Gov. Mike Kehoe',
+    title: 'Governor',
+    description: 'Repealed voter-approved paid sick leave while blaming "out-of-state interests."',
+    status: 'Active',
+  },
+];
+---
+
+<BaseLayout title="Missouri Watch" description="Expanding political accountability across Missouri's elected officials.">
+  <div class="container-site py-8">
+    <h1 class="section-header red">Missouri Watch</h1>
+
+    <p class="text-sm text-neutral-600 mb-8 max-w-2xl">
+      We're expanding accountability beyond Senator Hawley to cover Missouri's other elected
+      officials. The same methodology applies: fact-check public statements, track campaign
+      finance data, and connect words to actions.
+    </p>
+
+    <!-- Politician cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      {politicians.map((pol) => (
+        <div class="border border-neutral-200 p-6 bg-white border-t-[3px] border-t-flag-red">
+          <h3 class="font-headline text-lg font-bold text-neutral-900 mb-1">{pol.name}</h3>
+          <div class="text-xs text-neutral-500 uppercase tracking-widest mb-3">{pol.title}</div>
+          <p class="text-sm text-neutral-600 leading-relaxed mb-3">{pol.description}</p>
+          <span class="inline-block text-[0.65rem] font-bold px-2 py-0.5 bg-flag-red text-white uppercase">
+            {pol.status}
+          </span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Posts about Missouri politicians -->
+    {sortedPosts.length > 0 && (
+      <div>
+        <h2 class="section-header">Latest Missouri Analysis</h2>
+        <div class="max-w-3xl">
+          {sortedPosts.map((post) => (
+            <PostCard post={post} />
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</BaseLayout>

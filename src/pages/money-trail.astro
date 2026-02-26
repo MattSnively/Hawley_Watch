@@ -1,0 +1,125 @@
+---
+/**
+ * Money Trail — Full campaign finance data page.
+ * Shows industry breakdown with bar charts, top organizations table,
+ * and outside spending groups.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { donors, formatDollars } from '../lib/data';
+
+const industries = donors.industries;
+const topOrgs = donors.topOrganizations;
+const outsideSpending = donors.outsideSpending;
+const maxIndustryAmount = industries[0]?.amount || 1;
+---
+
+<BaseLayout title="Money Trail" description="Follow the money: Josh Hawley's campaign finance data, top donors, and outside spending.">
+  <div class="container-site py-8">
+    <h1 class="section-header">Follow the Money</h1>
+
+    <p class="text-sm text-neutral-600 mb-8 max-w-2xl">
+      Track who funds Senator Hawley's campaigns and how it connects to his votes.
+      All data sourced from OpenSecrets.org and FEC filings.
+    </p>
+
+    <!-- Career totals summary -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div class="text-center p-6 bg-neutral-50 border border-neutral-200 border-t-[3px] border-t-flag-red">
+        <div class="font-headline text-3xl font-bold">{formatDollars(donors.careerTotal)}</div>
+        <div class="text-xs uppercase tracking-widest text-neutral-500 mt-1">Career Total</div>
+      </div>
+      <div class="text-center p-6 bg-neutral-50 border border-neutral-200 border-t-[3px] border-t-flag-blue">
+        <div class="font-headline text-3xl font-bold">{formatDollars(donors.cycle2024)}</div>
+        <div class="text-xs uppercase tracking-widest text-neutral-500 mt-1">2024 Cycle</div>
+      </div>
+      <div class="text-center p-6 bg-neutral-50 border border-neutral-200 border-t-[3px] border-t-flag-red">
+        <div class="font-headline text-3xl font-bold">{industries.length}</div>
+        <div class="text-xs uppercase tracking-widest text-neutral-500 mt-1">Industry Categories</div>
+      </div>
+    </div>
+
+    <!-- Industry Breakdown -->
+    <h2 class="section-header">Industry Breakdown</h2>
+    <div class="max-w-3xl space-y-4 mb-10">
+      {industries.map((industry) => (
+        <div class="border border-neutral-200 p-4 bg-white">
+          <div class="flex justify-between items-center mb-2">
+            <span class="font-bold text-neutral-900">{industry.name}</span>
+            <span class="font-mono font-bold text-neutral-900">{formatDollars(industry.amount)}</span>
+          </div>
+          {/* Proportional bar */}
+          <div class="w-full h-2 bg-neutral-100 rounded">
+            <div
+              class="h-full money-bar-fill rounded"
+              style={`width: ${(industry.amount / maxIndustryAmount) * 100}%;`}
+            ></div>
+          </div>
+          {/* Hypocrisy note if available */}
+          {'hypocrisyAngle' in industry && industry.hypocrisyAngle && (
+            <p class="text-xs text-flag-red mt-2 italic">
+              {industry.hypocrisyAngle}
+            </p>
+          )}
+          {/* General note */}
+          {industry.note && !('hypocrisyAngle' in industry && industry.hypocrisyAngle) && (
+            <p class="text-xs text-neutral-500 mt-2">{industry.note}</p>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- Top Organizations -->
+    <h2 class="section-header">Top Organizations</h2>
+    <div class="max-w-3xl mb-10 overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="bg-flag-blue text-white text-left">
+            <th class="px-4 py-2 font-semibold">Organization</th>
+            <th class="px-4 py-2 font-semibold text-right">Amount</th>
+            <th class="px-4 py-2 font-semibold">Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          {topOrgs.map((org, i) => (
+            <tr class={i % 2 === 0 ? 'bg-white' : 'bg-neutral-50'}>
+              <td class="px-4 py-2 font-bold">{org.name}</td>
+              <td class="px-4 py-2 text-right font-mono">{formatDollars(org.amount)}</td>
+              <td class="px-4 py-2 text-neutral-500">{org.note}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Outside Spending -->
+    <h2 class="section-header red">Outside Spending (2018)</h2>
+    <p class="text-sm text-neutral-600 mb-4 max-w-2xl">
+      Outside groups that spent money to help elect Hawley in 2018. This is the kind
+      of spending enabled by Citizens United — which Hawley introduced a bill to overturn.
+    </p>
+    <div class="max-w-3xl space-y-4 mb-10">
+      {outsideSpending.map((group) => (
+        <div class="border-2 border-flag-red p-4 bg-white">
+          <div class="flex justify-between items-start mb-2">
+            <div>
+              <span class="font-bold text-lg text-neutral-900">{group.group}</span>
+              <div class="text-xs text-neutral-500">{group.affiliation}</div>
+            </div>
+            <span class="font-headline text-2xl font-bold text-flag-red">{formatDollars(group.amount)}</span>
+          </div>
+          {'hypocrisyAngle' in group && group.hypocrisyAngle && (
+            <p class="text-xs text-flag-red italic mt-1">{group.hypocrisyAngle}</p>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- Source citation -->
+    <div class="text-xs text-neutral-500 border-t border-neutral-200 pt-4">
+      Data source: <a href="https://www.opensecrets.org/members-of-congress/josh-hawley/summary?cid=N00041620" class="underline">OpenSecrets.org</a>
+      and <a href="https://www.fec.gov" class="underline">FEC.gov</a>.
+      Last updated: {donors.lastUpdated}.
+    </div>
+  </div>
+</BaseLayout>

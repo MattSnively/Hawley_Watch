@@ -1,0 +1,28 @@
+---
+/**
+ * TickerBar — Red "LATEST" news ticker bar shown below the navigation.
+ * Displays the most recent headline in a scrolling-style alert banner.
+ *
+ * Props:
+ *   text — The latest headline text to display.
+ */
+
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="bg-flag-red text-white text-xs font-bold uppercase tracking-widest overflow-hidden">
+  <div class="container-site py-2 flex items-center gap-4">
+    <!-- "LATEST" label badge — white background, red text -->
+    <span class="bg-white text-flag-red px-2.5 py-0.5 text-[0.7rem] whitespace-nowrap shrink-0">
+      LATEST
+    </span>
+    <!-- Headline text -->
+    <span class="font-normal text-xs">
+      {text}
+    </span>
+  </div>
+</div>

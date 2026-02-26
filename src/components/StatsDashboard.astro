@@ -1,0 +1,45 @@
+---
+/**
+ * StatsDashboard — 4-column grid of key metrics displayed below the ticker.
+ * Shows: Consistency Ratio, Avg Truth Score, Consistent Positions, Career Fundraising.
+ * Stat values are passed as props (computed at build time from content collections).
+ *
+ * Props:
+ *   consistencyRatio    — Percentage string (e.g., "7.5%")
+ *   avgTruthScore       — Percentage string (e.g., "28%")
+ *   consistentPositions — Fraction string (e.g., "4 / 53")
+ *   careerFundraising   — Dollar amount string (e.g., "$15M+")
+ */
+
+interface Props {
+  consistencyRatio: string;
+  avgTruthScore: string;
+  consistentPositions: string;
+  careerFundraising: string;
+}
+
+const { consistencyRatio, avgTruthScore, consistentPositions, careerFundraising } = Astro.props;
+
+/** Each stat card: value, label, and which cards get red vs blue top border */
+const stats = [
+  { value: consistencyRatio, label: 'Consistency Ratio', color: 'border-t-flag-blue', valueColor: 'text-score-misleading' },
+  { value: avgTruthScore, label: 'Avg. Truth Score', color: 'border-t-flag-red', valueColor: '' },
+  { value: consistentPositions, label: 'Consistent Positions', color: 'border-t-flag-blue', valueColor: '' },
+  { value: careerFundraising, label: 'Career Fundraising', color: 'border-t-flag-red', valueColor: '' },
+];
+---
+
+<section class="bg-neutral-50 border-b border-neutral-200">
+  <div class="container-site py-5 grid grid-cols-2 lg:grid-cols-4 gap-5">
+    {stats.map((stat) => (
+      <div class={`text-center p-4 bg-white border border-neutral-200 border-t-[3px] ${stat.color}`}>
+        <div class={`font-headline text-[2rem] font-bold leading-tight ${stat.valueColor || 'text-neutral-900'}`}>
+          {stat.value}
+        </div>
+        <div class="text-xs uppercase tracking-widest text-neutral-500 mt-1">
+          {stat.label}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

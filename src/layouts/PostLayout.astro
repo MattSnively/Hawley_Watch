@@ -1,0 +1,77 @@
+---
+/**
+ * PostLayout — Layout for individual blog post pages.
+ * Wraps BaseLayout and adds a 2-column layout: article content on the left,
+ * sidebar widgets on the right (truth score, related donors, related votes).
+ *
+ * Props:
+ *   frontmatter — The post's frontmatter data from the content collection.
+ */
+
+import BaseLayout from './BaseLayout.astro';
+import TruthScoreMeter from '../components/TruthScoreMeter.astro';
+import MoneyTrailSidebar from '../components/MoneyTrailSidebar.astro';
+import RecentVotes from '../components/RecentVotes.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    date: string;
+    topic: string[];
+    politician: string;
+    truthScore?: number;
+    rating?: string;
+    relatedDonors?: string[];
+    relatedVotes?: string[];
+    tweetUrl?: string;
+    description?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <div class="container-site py-8 grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-10">
+    <!-- Article content -->
+    <article class="prose prose-neutral max-w-none
+                     prose-headings:font-headline prose-headings:text-flag-blue
+                     prose-a:text-flag-blue prose-strong:text-neutral-900">
+
+      <!-- Post header with date and topic badges -->
+      <div class="not-prose mb-6">
+        <div class="flex items-center gap-3 flex-wrap mb-4">
+          <time class="text-sm text-neutral-500" datetime={frontmatter.date}>
+            {new Date(frontmatter.date).toLocaleDateString('en-US', {
+              year: 'numeric', month: 'long', day: 'numeric'
+            })}
+          </time>
+          {frontmatter.topic?.map((t: string) => (
+            <span class={`topic-badge topic-badge-${t}`}>{t.replace('-', ' ')}</span>
+          ))}
+        </div>
+
+        <h1 class="font-headline text-3xl font-bold text-neutral-900 leading-tight mb-4">
+          {frontmatter.title}
+        </h1>
+
+        <!-- Truth Score meter if the post has a score -->
+        {frontmatter.truthScore != null && frontmatter.rating && (
+          <TruthScoreMeter score={frontmatter.truthScore} rating={frontmatter.rating} />
+        )}
+      </div>
+
+      <!-- Rendered markdown content -->
+      <slot />
+    </article>
+
+    <!-- Sidebar -->
+    <aside class="space-y-6">
+      {/* Money Trail sidebar — shows top donor industries */}
+      <MoneyTrailSidebar />
+
+      {/* Recent Votes sidebar */}
+      <RecentVotes />
+    </aside>
+  </div>
+</BaseLayout>

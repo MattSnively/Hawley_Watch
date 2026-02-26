@@ -1,0 +1,122 @@
+---
+/**
+ * Home Page — Main landing page for Hawley Watch.
+ * Layout: FlagStripe → Header → TickerBar → StatsDashboard →
+ *         2-column content (post feed + sidebar widgets).
+ * Posts sorted by date descending, filtered to published only.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TickerBar from '../components/TickerBar.astro';
+import StatsDashboard from '../components/StatsDashboard.astro';
+import PostCard from '../components/PostCard.astro';
+import ReceiptCard from '../components/ReceiptCard.astro';
+import ConsistencyRatio from '../components/ConsistencyRatio.astro';
+import CreditTracker from '../components/CreditTracker.astro';
+import MoneyTrailSidebar from '../components/MoneyTrailSidebar.astro';
+import ImpactSidebar from '../components/ImpactSidebar.astro';
+import RecentVotes from '../components/RecentVotes.astro';
+import MissouriWatchTeaser from '../components/MissouriWatchTeaser.astro';
+import { getCollection } from 'astro:content';
+import { computeStats } from '../lib/data';
+
+// Load published posts, sorted by date descending
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const sortedPosts = allPosts.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+// Load credit entries for sidebar widget
+const creditEntries = await getCollection('credit');
+
+// Compute aggregate stats for the dashboard
+const stats = computeStats(allPosts);
+
+// Latest post for the ticker bar
+const latestPost = sortedPosts[0];
+const tickerText = latestPost
+  ? `${latestPost.data.title} — Truth Score: ${latestPost.data.truthScore || 'N/A'}%`
+  : 'Welcome to Hawley Watch — holding politicians accountable.';
+---
+
+<BaseLayout title="Home">
+  <!-- Breaking news ticker -->
+  <TickerBar text={tickerText} />
+
+  <!-- Stats dashboard — key metrics at a glance -->
+  <StatsDashboard
+    consistencyRatio={stats.consistencyRatio}
+    avgTruthScore={stats.avgTruthScore}
+    consistentPositions={stats.consistentPositions}
+    careerFundraising={stats.careerFundraising}
+  />
+
+  <!-- Main 2-column content area -->
+  <div class="container-site py-8 grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-10">
+
+    <!-- LEFT COLUMN: Post feed -->
+    <div>
+      <h2 class="section-header">Latest Analysis</h2>
+
+      {sortedPosts.map((post, index) => (
+        <div>
+          <PostCard post={post} />
+
+          {/* Show a receipt card after the first post (matching mockup layout) */}
+          {index === 0 && post.data.rating && post.data.truthScore != null && (
+            <ReceiptCard
+              tweetQuote="President Trump is working to cap credit card rates... The Left just doesn't get it"
+              tweetDate="Jan 13, 2026"
+              receiptText={'Hawley <strong>co-sponsored the Credit Card Rate Cap Act with Bernie Sanders</strong> in 2023 — the exact same policy he&apos;s now praising Trump for while attacking &ldquo;The Left.&rdquo;'}
+              receiptSource="Congress.gov, S.2023-XXX"
+              score={post.data.truthScore}
+              rating={post.data.rating}
+              analysisUrl={`/hawley-watch/${post.slug}`}
+            />
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- RIGHT COLUMN: Sidebar widgets -->
+    <aside class="space-y-0">
+      <!-- Consistency Ratio widget -->
+      <ConsistencyRatio
+        consistent={stats.consistent}
+        receipts={stats.receipts}
+        noise={stats.noise}
+      />
+
+      <!-- Average Truth Score widget -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">Avg. Truth Score</div>
+        <div class="sidebar-card-body text-center py-4">
+          <div class="font-headline text-5xl font-bold text-score-misleading leading-none">
+            {stats.avgTruthScore}
+          </div>
+          <div class="text-sm font-bold text-score-misleading uppercase mt-0.5">
+            Misleading
+          </div>
+          <div class="text-xs text-neutral-500 mt-1">
+            Average across scored posts
+          </div>
+        </div>
+      </div>
+
+      <!-- Credit Where It's Due -->
+      <CreditTracker entries={creditEntries} />
+
+      <!-- Top Donor Industries -->
+      <MoneyTrailSidebar />
+
+      <!-- Impact on Missouri -->
+      <ImpactSidebar />
+
+      <!-- Recent Votes -->
+      <RecentVotes />
+
+      <!-- Missouri Watch teaser -->
+      <MissouriWatchTeaser />
+    </aside>
+  </div>
+</BaseLayout>

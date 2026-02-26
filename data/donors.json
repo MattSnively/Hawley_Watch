@@ -1,0 +1,108 @@
+{
+  "politician": "josh-hawley",
+  "lastUpdated": "2026-02-25",
+  "source": "OpenSecrets.org / FEC.gov",
+  "careerTotal": 15000000,
+  "cycle2024": 9600000,
+  "industries": [
+    {
+      "name": "Retired",
+      "amount": 3563139,
+      "keywords": [],
+      "note": "Largest donor category — retirees contributing individually"
+    },
+    {
+      "name": "Republican/Conservative",
+      "amount": 2556029,
+      "keywords": ["republican", "conservative", "gop", "party"],
+      "note": "Party-aligned organizations and committees"
+    },
+    {
+      "name": "Securities & Investment",
+      "amount": 833820,
+      "keywords": ["wall street", "banks", "financial", "stock", "investment", "hedge fund", "goldman", "jpmorgan", "credit card", "interest rate", "securities"],
+      "note": "Despite populist anti-Wall Street rhetoric, this is Hawley's #3 industry donor",
+      "hypocrisyAngle": "Hawley brands himself as a populist fighting Wall Street elites while accepting $833K from the securities and investment industry."
+    },
+    {
+      "name": "Real Estate",
+      "amount": 738153,
+      "keywords": ["real estate", "housing", "homes", "rent", "landlord", "property", "mortgage", "homebuyer"],
+      "note": "#4 industry donor",
+      "hypocrisyAngle": "Hawley tweets about housing affordability while accepting $738K from the real estate industry that profits from high housing costs."
+    },
+    {
+      "name": "Lawyers/Law Firms",
+      "amount": 473445,
+      "keywords": ["lawyer", "law firm", "legal", "attorney"],
+      "note": "Standard donor category for a Yale Law graduate"
+    },
+    {
+      "name": "Misc Manufacturing & Distributing",
+      "amount": 448579,
+      "keywords": ["manufacturing", "factory", "jobs", "industry", "made in america"],
+      "note": "Aligns with populist messaging about American manufacturing"
+    },
+    {
+      "name": "Leadership PACs",
+      "amount": 440830,
+      "keywords": ["pac", "leadership", "establishment"],
+      "note": "Party leadership money",
+      "hypocrisyAngle": "Hawley positions himself as anti-establishment while accepting $440K from leadership PACs — the establishment's funding mechanism."
+    },
+    {
+      "name": "Health Professionals",
+      "amount": 434752,
+      "keywords": ["healthcare", "health", "doctor", "hospital", "medical", "pharma", "pharmaceutical", "drug", "insurance", "medicare", "medicaid"],
+      "note": "#8 industry donor",
+      "hypocrisyAngle": "Relevant when Hawley tweets about healthcare costs — his donors include the industries that profit from the current system."
+    },
+    {
+      "name": "Oil & Gas",
+      "amount": 292886,
+      "keywords": ["oil", "gas", "energy", "fossil fuel", "pipeline", "drilling", "climate", "epa", "environment", "carbon"],
+      "note": "#9 industry donor. Koch-affiliated Americans for Prosperity also spent $4M to elect him in 2018.",
+      "hypocrisyAngle": "Koch network spent $4M electing Hawley. He consistently votes against climate and environmental measures."
+    },
+    {
+      "name": "Lobbyists",
+      "amount": 277681,
+      "keywords": ["lobbyist", "lobby", "lobbying", "k street", "influence", "swamp", "drain the swamp"],
+      "note": "#10 industry donor",
+      "hypocrisyAngle": "Hawley talks about draining the swamp while accepting $277K from professional lobbyists."
+    }
+  ],
+  "topOrganizations": [
+    { "name": "Jones Financial Companies", "amount": 36485, "note": "Edward Jones parent company" },
+    { "name": "Diamond Pet Foods", "amount": 27700, "note": "Pet food manufacturer" },
+    { "name": "Hunter Engineering", "amount": 22400, "note": "Automotive equipment" },
+    { "name": "Orscheln Group", "amount": 16800, "note": "Farm supply retailer" },
+    { "name": "Hallmark Cards", "amount": 16019, "note": "Greeting cards (KC-based)" },
+    { "name": "Bayer AG", "amount": 11250, "note": "Pharmaceutical/agriculture" },
+    { "name": "Charles Schwab Corp", "amount": 11225, "note": "Financial services" }
+  ],
+  "outsideSpending": [
+    {
+      "group": "Senate Leadership Fund",
+      "amount": 21200000,
+      "year": 2018,
+      "affiliation": "Mitch McConnell-aligned Super PAC",
+      "keywords": ["mcconnell", "establishment", "citizens united", "dark money", "super pac"],
+      "hypocrisyAngle": "Hawley introduced a bill to overturn Citizens United while being the #1 beneficiary of the exact kind of Super PAC spending Citizens United enabled."
+    },
+    {
+      "group": "Americans for Prosperity",
+      "amount": 4000000,
+      "year": 2018,
+      "affiliation": "Koch Brothers network",
+      "keywords": ["koch", "libertarian", "deregulation", "climate", "environment"]
+    },
+    {
+      "group": "NRA",
+      "amount": 1400000,
+      "year": 2018,
+      "affiliation": "Gun rights lobby",
+      "keywords": ["gun", "guns", "nra", "second amendment", "2nd amendment", "firearm", "shooting", "mass shooting"]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+---
+/**
+ * ReceiptCard — Shareable contradiction card with "What He Said / The Receipt" layout.
+ * Red-bordered card with two-column split showing the original statement vs. the
+ * contradicting evidence. Footer includes truth score badge and analysis link.
+ *
+ * Props:
+ *   tweetQuote    — The quoted text from the original tweet/statement
+ *   tweetDate     — Date of the original tweet (e.g., "Jan 13, 2026")
+ *   receiptText   — The contradicting evidence text
+ *   receiptSource — Source citation for the receipt (e.g., "Congress.gov, S.2023-XXX")
+ *   score         — Truth score (0-100)
+ *   rating        — Rating label (false/misleading/mixed/mostly-true/true)
+ *   analysisUrl   — URL to the full analysis post (optional)
+ */
+
+interface Props {
+  tweetQuote: string;
+  tweetDate: string;
+  receiptText: string;
+  receiptSource: string;
+  score: number;
+  rating: string;
+  analysisUrl?: string;
+}
+
+const { tweetQuote, tweetDate, receiptText, receiptSource, score, rating, analysisUrl = '#' } = Astro.props;
+
+const ratingKey = rating.toLowerCase().replace(/\s+/g, '-');
+const ratingLabel = rating.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+---
+
+<div class="border-2 border-flag-red mb-6 bg-white">
+  <!-- Red header with RECEIPTS branding -->
+  <div class="bg-flag-red text-white px-4 py-2 flex justify-between items-center">
+    <span class="text-sm font-bold uppercase tracking-[1.5px]">Receipts</span>
+    <span class="text-[0.7rem] opacity-80">hawleywatch.com</span>
+  </div>
+
+  <!-- Two-column body: What He Said | The Receipt -->
+  <div class="grid grid-cols-1 md:grid-cols-2">
+    <!-- Left side: What He Said -->
+    <div class="p-4 md:border-r border-neutral-200">
+      <div class="text-[0.7rem] font-bold uppercase tracking-widest text-neutral-500 mb-2.5">
+        What He Said
+      </div>
+      <div class="text-sm leading-relaxed text-neutral-700">
+        <strong>@HawleyMO &middot; {tweetDate}</strong><br /><br />
+        &ldquo;{tweetQuote}&rdquo;
+      </div>
+    </div>
+
+    <!-- Right side: The Receipt -->
+    <div class="p-4">
+      <div class="text-[0.7rem] font-bold uppercase tracking-widest text-neutral-500 mb-2.5">
+        The Receipt
+      </div>
+      <div class="text-sm leading-relaxed text-neutral-700" set:html={receiptText} />
+      <div class="text-xs text-neutral-500 mt-2 italic">
+        Source: {receiptSource}
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer with truth score badge and link -->
+  <div class="border-t border-neutral-200 px-4 py-2.5 flex justify-between items-center bg-neutral-50">
+    <span class={`truth-badge truth-badge-${ratingKey} text-[0.7rem]`}>
+      {ratingLabel} &mdash; {score}%
+    </span>
+    <a href={analysisUrl} class="read-more text-xs">Full Analysis &rarr;</a>
+  </div>
+</div>

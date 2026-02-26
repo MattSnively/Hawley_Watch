@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hawley Watch — Holding Josh Hawley Accountable</title>
+  <style>
+    /* ===========================
+       CSS RESET & BASE STYLES
+       =========================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Official US Flag colors */
+      --red: #B31942;
+      --blue: #0A3161;
+      --white: #FFFFFF;
+
+      /* Neutral palette */
+      --gray-50: #FAFAFA;
+      --gray-100: #F5F5F5;
+      --gray-200: #E5E5E5;
+      --gray-300: #D4D4D4;
+      --gray-500: #737373;
+      --gray-700: #404040;
+      --gray-900: #171717;
+
+      /* Truth score colors */
+      --score-false: #DC2626;
+      --score-misleading: #EA580C;
+      --score-mixed: #CA8A04;
+      --score-mostly-true: #16A34A;
+      --score-true: #059669;
+
+      /* Typography */
+      --font-headline: 'Georgia', 'Playfair Display', 'Times New Roman', serif;
+      --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ===========================
+       TOP BANNER — thin red/blue stripe
+       =========================== */
+    .flag-stripe {
+      height: 4px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--red) 50%, var(--blue) 50%, var(--blue) 100%);
+    }
+
+    /* ===========================
+       HEADER / NAVIGATION
+       =========================== */
+    .site-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0;
+    }
+
+    .header-top {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 24px 12px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .site-logo {
+      font-family: var(--font-headline);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: -0.5px;
+    }
+
+    .site-logo span { color: var(--red); }
+
+    .site-tagline {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      font-style: italic;
+    }
+
+    /* Navigation bar */
+    .nav-bar {
+      background: var(--blue);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      gap: 0;
+    }
+
+    .nav-bar a {
+      color: var(--white);
+      padding: 12px 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: background 0.15s;
+    }
+
+    .nav-bar a:hover,
+    .nav-bar a.active {
+      background: var(--red);
+      text-decoration: none;
+    }
+
+    /* ===========================
+       BREAKING / TICKER BAR
+       =========================== */
+    .ticker-bar {
+      background: var(--red);
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      overflow: hidden;
+    }
+
+    .ticker-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .ticker-label {
+      background: var(--white);
+      color: var(--red);
+      padding: 2px 10px;
+      font-size: 0.7rem;
+      white-space: nowrap;
+    }
+
+    .ticker-text {
+      font-weight: 400;
+      font-size: 0.8rem;
+    }
+
+    /* ===========================
+       STATS DASHBOARD
+       =========================== */
+    .stats-bar {
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 16px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-top: 3px solid var(--blue);
+    }
+
+    .stat-card:nth-child(2) { border-top-color: var(--red); }
+    .stat-card:nth-child(3) { border-top-color: var(--blue); }
+    .stat-card:nth-child(4) { border-top-color: var(--red); }
+
+    .stat-number {
+      font-family: var(--font-headline);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.1;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+
+    /* ===========================
+       MAIN CONTENT LAYOUT
+       =========================== */
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+    }
+
+    /* Section headers — styled like newspaper section headers */
+    .section-header {
+      font-family: var(--font-headline);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--blue);
+      border-bottom: 3px solid var(--blue);
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .section-header.red {
+      color: var(--red);
+      border-bottom-color: var(--red);
+    }
+
+    /* ===========================
+       POST CARDS
+       =========================== */
+    .post-card {
+      border: 1px solid var(--gray-200);
+      margin-bottom: 24px;
+      background: var(--white);
+    }
+
+    .post-card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--gray-100);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .post-date {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+    }
+
+    .post-topic {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .post-topic.culture-war { background: #7C3AED; }
+    .post-topic.economy { background: var(--red); }
+    .post-topic.immigration { background: #B45309; }
+    .post-topic.democracy { background: var(--blue); }
+
+    /* Simulated tweet embed */
+    .tweet-embed {
+      margin: 16px 20px;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 16px;
+      background: var(--white);
+    }
+
+    .tweet-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .tweet-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--gray-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: var(--gray-700);
+    }
+
+    .tweet-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .tweet-handle {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+    }
+
+    .tweet-body {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--gray-900);
+    }
+
+    .tweet-meta {
+      margin-top: 12px;
+      font-size: 0.75rem;
+      color: var(--gray-500);
+      padding-top: 12px;
+      border-top: 1px solid var(--gray-100);
+    }
+
+    /* Truth score meter */
+    .truth-score-section {
+      padding: 16px 20px;
+      background: var(--gray-50);
+    }
+
+    .truth-score-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .truth-score-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray-700);
+    }
+
+    .truth-score-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .badge-false { background: var(--score-false); }
+    .badge-misleading { background: var(--score-misleading); }
+    .badge-mixed { background: var(--score-mixed); }
+    .badge-mostly-true { background: var(--score-mostly-true); }
+    .badge-true { background: var(--score-true); }
+
+    .truth-score-bar {
+      height: 8px;
+      background: var(--gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .truth-score-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .fill-false { background: var(--score-false); }
+    .fill-misleading { background: var(--score-misleading); }
+    .fill-mixed { background: var(--score-mixed); }
+    .fill-mostly-true { background: var(--score-mostly-true); }
+    .fill-true { background: var(--score-true); }
+
+    .truth-score-number {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-top: 4px;
+    }
+
+    /* Post card body / excerpt */
+    .post-card-body {
+      padding: 16px 20px;
+    }
+
+    .post-title {
+      font-family: var(--font-headline);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .post-excerpt {
+      font-size: 0.9rem;
+      color: var(--gray-700);
+      line-height: 1.5;
+    }
+
+    .post-card-footer {
+      padding: 12px 20px;
+      border-top: 1px solid var(--gray-100);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .read-more {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .post-sources {
+      font-size: 0.75rem;
+      color: var(--gray-500);
+    }
+
+    /* ===========================
+       SIDEBAR
+       =========================== */
+    .sidebar {}
+
+    .sidebar-card {
+      border: 1px solid var(--gray-200);
+      margin-bottom: 24px;
+      background: var(--white);
+    }
+
+    .sidebar-card-header {
+      padding: 12px 16px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .sidebar-card-header.red-bg {
+      background: var(--red);
+    }
+
+    .sidebar-card-body {
+      padding: 16px;
+    }
+
+    /* Money trail mini-chart */
+    .money-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 0.85rem;
+    }
+
+    .money-row:last-child { border-bottom: none; }
+
+    .money-industry { color: var(--gray-700); }
+
+    .money-amount {
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--gray-900);
+    }
+
+    .money-bar-container {
+      width: 100%;
+      height: 6px;
+      background: var(--gray-100);
+      border-radius: 3px;
+      margin-top: 4px;
+    }
+
+    .money-bar-fill {
+      height: 100%;
+      background: var(--red);
+      border-radius: 3px;
+    }
+
+    /* Running truth score widget */
+    .running-score {
+      text-align: center;
+      padding: 8px 0;
+    }
+
+    .running-score-number {
+      font-family: var(--font-headline);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--score-misleading);
+      line-height: 1;
+    }
+
+    .running-score-label {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+
+    .running-score-rating {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--score-misleading);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* Recent votes widget */
+    .vote-item {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 0.85rem;
+    }
+
+    .vote-item:last-child { border-bottom: none; }
+
+    .vote-bill {
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+
+    .vote-result {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      margin-left: 4px;
+    }
+
+    .vote-yes {
+      background: #DCFCE7;
+      color: #166534;
+    }
+
+    .vote-no {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+
+    .vote-desc {
+      color: var(--gray-500);
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+
+    /* ===========================
+       RECEIPTS CARD
+       =========================== */
+    .receipt-card {
+      border: 2px solid var(--red);
+      margin-bottom: 24px;
+      background: var(--white);
+    }
+
+    .receipt-card-header {
+      background: var(--red);
+      color: var(--white);
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .receipt-card-header-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .receipt-card-header-brand {
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+
+    .receipt-card-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .receipt-side {
+      padding: 16px;
+    }
+
+    .receipt-side:first-child {
+      border-right: 1px solid var(--gray-200);
+    }
+
+    .receipt-side-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray-500);
+      margin-bottom: 10px;
+    }
+
+    .receipt-side-content {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--gray-700);
+    }
+
+    .receipt-source {
+      font-size: 0.75rem;
+      color: var(--gray-500);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    .receipt-card-footer {
+      border-top: 1px solid var(--gray-200);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--gray-50);
+    }
+
+    /* ===========================
+       CONSISTENCY RATIO WIDGET
+       =========================== */
+    .consistency-widget {
+      text-align: center;
+      padding: 8px 0;
+    }
+
+    .consistency-ratio-display {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .consistency-big-number {
+      font-family: var(--font-headline);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--score-misleading);
+      line-height: 1;
+    }
+
+    .consistency-of {
+      font-size: 0.9rem;
+      color: var(--gray-500);
+    }
+
+    .consistency-total {
+      font-family: var(--font-headline);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gray-700);
+      line-height: 1;
+    }
+
+    .consistency-bar {
+      height: 10px;
+      background: var(--gray-200);
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 8px 0;
+      display: flex;
+    }
+
+    .consistency-bar-consistent {
+      background: var(--score-mostly-true);
+      height: 100%;
+    }
+
+    .consistency-bar-receipt {
+      background: var(--score-false);
+      height: 100%;
+    }
+
+    .consistency-bar-noise {
+      background: var(--gray-300);
+      height: 100%;
+    }
+
+    .consistency-legend {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      font-size: 0.7rem;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 3px;
+      vertical-align: middle;
+    }
+
+    .legend-dot.green { background: var(--score-mostly-true); }
+    .legend-dot.red { background: var(--score-false); }
+    .legend-dot.gray { background: var(--gray-300); }
+
+    /* ===========================
+       CREDIT WHERE IT'S DUE
+       =========================== */
+    .credit-item {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .credit-item:last-child { border-bottom: none; }
+
+    .credit-item-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--gray-900);
+    }
+
+    .credit-item-check {
+      color: var(--score-mostly-true);
+      margin-right: 4px;
+    }
+
+    .credit-item-desc {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    .credit-item-status {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      background: #DCFCE7;
+      color: #166534;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ===========================
+       FOOTER
+       =========================== */
+    .site-footer {
+      background: var(--blue);
+      color: rgba(255,255,255,0.7);
+      margin-top: 48px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-section h3 {
+      color: var(--white);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+    }
+
+    .footer-section a:hover { color: var(--white); }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li { margin-bottom: 6px; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 16px 24px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ===========================
+       RESPONSIVE
+       =========================== */
+    @media (max-width: 768px) {
+      .header-top { text-align: center; justify-content: center; }
+      .nav-inner { flex-wrap: wrap; justify-content: center; }
+      .nav-bar a { padding: 10px 14px; font-size: 0.75rem; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .content-wrapper { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .stat-number { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Thin patriotic stripe at top -->
+  <div class="flag-stripe"></div>
+
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="header-top">
+      <div>
+        <div class="site-logo">HAWLEY <span>WATCH</span></div>
+        <div class="site-tagline">Tracking what he says vs. what he does</div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+      <div class="nav-inner">
+        <a href="#" class="active">Home</a>
+        <a href="#">Hawley Watch</a>
+        <a href="#">Money Trail</a>
+        <a href="#">Voting Record</a>
+        <a href="#">Missouri Watch</a>
+        <a href="#">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- BREAKING / TICKER -->
+  <div class="ticker-bar">
+    <div class="ticker-inner">
+      <span class="ticker-label">LATEST</span>
+      <span class="ticker-text">Hawley tweets about border security while voting against bipartisan immigration bill &mdash; Truth Score: 22% FALSE</span>
+    </div>
+  </div>
+
+  <!-- STATS DASHBOARD -->
+  <section class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-card">
+        <div class="stat-number" style="color: var(--score-misleading);">7.5%</div>
+        <div class="stat-label">Consistency Ratio</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">28%</div>
+        <div class="stat-label">Avg. Truth Score</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4 / 53</div>
+        <div class="stat-label">Consistent Positions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">$15M+</div>
+        <div class="stat-label">Career Fundraising</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <div class="content-wrapper">
+
+    <!-- LEFT COLUMN: Post Feed -->
+    <main>
+      <h2 class="section-header">Latest Analysis</h2>
+
+      <!-- POST 1 -->
+      <article class="post-card">
+        <div class="post-card-header">
+          <span class="post-date">January 13, 2026</span>
+          <div>
+            <span class="post-topic culture-war">Culture War</span>
+            <span class="post-topic economy">Economy</span>
+          </div>
+        </div>
+
+        <!-- Simulated tweet embed -->
+        <div class="tweet-embed">
+          <div class="tweet-header">
+            <div class="tweet-avatar">JH</div>
+            <div>
+              <div class="tweet-name">Josh Hawley</div>
+              <div class="tweet-handle">@HawleyMO</div>
+            </div>
+          </div>
+          <div class="tweet-body">
+            Democrats were at the U.S. Supreme Court today pushing for men in women's sports. Meanwhile, President Trump is working to cap credit card rates and stop Wall Street from buying up single-family homes. The Left just doesn't get it
+          </div>
+          <div class="tweet-meta">3:47 PM &middot; Jan 13, 2026 &middot; 12.4K Reposts &middot; 38.1K Likes</div>
+        </div>
+
+        <!-- Truth Score -->
+        <div class="truth-score-section">
+          <div class="truth-score-label-row">
+            <span class="truth-score-title">Truth Score</span>
+            <span class="truth-score-badge badge-misleading">Misleading</span>
+          </div>
+          <div class="truth-score-bar">
+            <div class="truth-score-fill fill-misleading" style="width: 30%;"></div>
+          </div>
+          <div class="truth-score-number">30 / 100</div>
+        </div>
+
+        <div class="post-card-body">
+          <h3 class="post-title">Democrats, Trans Athletes, and Credit Cards: Hawley's Misleading Tweet</h3>
+          <p class="post-excerpt">
+            Hawley praises Trump for proposing a credit card rate cap &mdash; the same policy Hawley himself co-sponsored with Bernie Sanders in 2023. He calls transgender women "men" (he's a Yale Law graduate and knows the distinction), creates a false dichotomy between civil rights and economics, and omits that Democrats proposed these same economic policies first.
+          </p>
+        </div>
+
+        <div class="post-card-footer">
+          <a href="#" class="read-more">Read Full Analysis &rarr;</a>
+          <span class="post-sources">Sources: PolitiFact, NPR, OpenSecrets</span>
+        </div>
+      </article>
+
+      <!-- RECEIPTS CARD — Shareable contradiction card -->
+      <div class="receipt-card">
+        <div class="receipt-card-header">
+          <span class="receipt-card-header-title">Receipts</span>
+          <span class="receipt-card-header-brand">hawleywatch.com</span>
+        </div>
+        <div class="receipt-card-body">
+          <div class="receipt-side">
+            <div class="receipt-side-label">What He Said</div>
+            <div class="receipt-side-content">
+              <strong>@HawleyMO &middot; Jan 13, 2026</strong><br><br>
+              "President Trump is working to cap credit card rates... The Left just doesn't get it"
+            </div>
+          </div>
+          <div class="receipt-side">
+            <div class="receipt-side-label">The Receipt</div>
+            <div class="receipt-side-content">
+              Hawley <strong>co-sponsored the Credit Card Rate Cap Act with Bernie Sanders</strong> in 2023 — the exact same policy he's now praising Trump for while attacking "The Left."
+              <div class="receipt-source">Source: Congress.gov, S.2023-XXX</div>
+            </div>
+          </div>
+        </div>
+        <div class="receipt-card-footer">
+          <div>
+            <span class="truth-score-badge badge-misleading" style="font-size: 0.7rem;">Misleading &mdash; 30%</span>
+          </div>
+          <a href="#" class="read-more" style="font-size: 0.8rem;">Full Analysis &rarr;</a>
+        </div>
+      </div>
+
+      <!-- POST 2 -->
+      <article class="post-card">
+        <div class="post-card-header">
+          <span class="post-date">January 10, 2026</span>
+          <span class="post-topic immigration">Immigration</span>
+        </div>
+
+        <div class="tweet-embed">
+          <div class="tweet-header">
+            <div class="tweet-avatar">JH</div>
+            <div>
+              <div class="tweet-name">Josh Hawley</div>
+              <div class="tweet-handle">@HawleyMO</div>
+            </div>
+          </div>
+          <div class="tweet-body">
+            The border is a DISASTER. Biden let in millions of illegals and now working Americans are paying the price. Only Trump is serious about securing our border.
+          </div>
+          <div class="tweet-meta">11:22 AM &middot; Jan 10, 2026 &middot; 8.7K Reposts &middot; 24.3K Likes</div>
+        </div>
+
+        <div class="truth-score-section">
+          <div class="truth-score-label-row">
+            <span class="truth-score-title">Truth Score</span>
+            <span class="truth-score-badge badge-misleading">Misleading</span>
+          </div>
+          <div class="truth-score-bar">
+            <div class="truth-score-fill fill-misleading" style="width: 25%;"></div>
+          </div>
+          <div class="truth-score-number">25 / 100</div>
+        </div>
+
+        <div class="post-card-body">
+          <h3 class="post-title">Hawley Blames Biden for Border Crisis He Voted to Perpetuate</h3>
+          <p class="post-excerpt">
+            Hawley conveniently forgets that he voted against the bipartisan border security bill in February 2024 &mdash; a bill that would have added 1,500 border agents and tightened asylum rules. He helped kill the most significant border legislation in decades, then blames Democrats for the result.
+          </p>
+        </div>
+
+        <div class="post-card-footer">
+          <a href="#" class="read-more">Read Full Analysis &rarr;</a>
+          <span class="post-sources">Sources: Congress.gov, PolitiFact, CBP</span>
+        </div>
+      </article>
+
+      <!-- POST 3 -->
+      <article class="post-card">
+        <div class="post-card-header">
+          <span class="post-date">January 7, 2026</span>
+          <span class="post-topic democracy">Democracy</span>
+        </div>
+
+        <div class="tweet-embed">
+          <div class="tweet-header">
+            <div class="tweet-avatar">JH</div>
+            <div>
+              <div class="tweet-name">Josh Hawley</div>
+              <div class="tweet-handle">@HawleyMO</div>
+            </div>
+          </div>
+          <div class="tweet-body">
+            Five years ago I stood up for election integrity when no one else would. I'd do it again. The American people deserve leaders who fight for them, not the D.C. establishment.
+          </div>
+          <div class="tweet-meta">9:15 AM &middot; Jan 7, 2026 &middot; 15.2K Reposts &middot; 41.8K Likes</div>
+        </div>
+
+        <div class="truth-score-section">
+          <div class="truth-score-label-row">
+            <span class="truth-score-title">Truth Score</span>
+            <span class="truth-score-badge badge-false">False</span>
+          </div>
+          <div class="truth-score-bar">
+            <div class="truth-score-fill fill-false" style="width: 12%;"></div>
+          </div>
+          <div class="truth-score-number">12 / 100</div>
+        </div>
+
+        <div class="post-card-body">
+          <h3 class="post-title">Jan. 6 Anniversary: Hawley Rewrites His Own History</h3>
+          <p class="post-excerpt">
+            On the 5th anniversary of January 6th, Hawley frames his objection to the 2020 election results as "standing up for election integrity." He was the first senator to announce he would object to the Electoral College certification. No credible evidence of fraud was ever found. His iconic fist pump to the mob before the Capitol was breached remains one of the defining images of that day.
+          </p>
+        </div>
+
+        <div class="post-card-footer">
+          <a href="#" class="read-more">Read Full Analysis &rarr;</a>
+          <span class="post-sources">Sources: AP, Reuters, Jan 6 Committee</span>
+        </div>
+      </article>
+
+    </main>
+
+    <!-- RIGHT COLUMN: Sidebar -->
+    <aside class="sidebar">
+
+      <!-- Consistency Ratio -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header red-bg">Hawley's Consistency Ratio</div>
+        <div class="sidebar-card-body">
+          <div class="consistency-widget">
+            <div class="consistency-ratio-display">
+              <span class="consistency-big-number">4</span>
+              <span class="consistency-of">of</span>
+              <span class="consistency-total">53</span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--gray-500); margin-bottom: 8px;">
+              analyzed tweets match his actions (<strong style="color: var(--score-misleading);">7.5%</strong>)
+            </div>
+            <div class="consistency-bar">
+              <div class="consistency-bar-consistent" style="width: 7.5%;"></div>
+              <div class="consistency-bar-receipt" style="width: 71%;"></div>
+              <div class="consistency-bar-noise" style="width: 21.5%;"></div>
+            </div>
+            <div class="consistency-legend">
+              <span><span class="legend-dot green"></span>Consistent</span>
+              <span><span class="legend-dot red"></span>Receipts</span>
+              <span><span class="legend-dot gray"></span>Noise</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Running Truth Score -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">Avg. Truth Score</div>
+        <div class="sidebar-card-body">
+          <div class="running-score">
+            <div class="running-score-number">28%</div>
+            <div class="running-score-rating">Misleading</div>
+            <div class="running-score-label">Average across scored posts</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Credit Where It's Due -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header" style="background: var(--score-mostly-true);">Credit Where It's Due</div>
+        <div class="sidebar-card-body">
+          <p style="font-size: 0.8rem; color: var(--gray-500); margin-bottom: 12px;">
+            Positions where Hawley's words match his actions:
+          </p>
+
+          <div class="credit-item">
+            <div class="credit-item-title">
+              <span class="credit-item-check">&#10003;</span>Congressional Stock Trading Ban
+            </div>
+            <div class="credit-item-desc">PELOSI Act (2022). Consistent legislation and voting.</div>
+            <span class="credit-item-status">Consistent</span>
+          </div>
+
+          <div class="credit-item">
+            <div class="credit-item-title">
+              <span class="credit-item-check">&#10003;</span>Big Tech Antitrust
+            </div>
+            <div class="credit-item-desc">Multiple bills introduced. Voted accordingly.</div>
+            <span class="credit-item-status">Consistent</span>
+          </div>
+
+          <div class="credit-item">
+            <div class="credit-item-title">
+              <span class="credit-item-check">&#10003;</span>TikTok Ban
+            </div>
+            <div class="credit-item-desc">Consistent rhetoric and legislative action.</div>
+            <span class="credit-item-status">Consistent</span>
+          </div>
+
+          <div class="credit-item">
+            <div class="credit-item-title">
+              <span class="credit-item-check">&#10003;</span>Railroad Worker Safety
+            </div>
+            <div class="credit-item-desc">Co-sponsored bipartisan legislation post-East Palestine.</div>
+            <span class="credit-item-status">Consistent</span>
+          </div>
+
+          <div style="margin-top: 12px; text-align: center;">
+            <a href="#" class="read-more" style="font-size: 0.8rem;">View All Credit Entries &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Money Trail Summary -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">Top Donor Industries</div>
+        <div class="sidebar-card-body">
+          <div class="money-row">
+            <span class="money-industry">Retired</span>
+            <span class="money-amount">$3.56M</span>
+          </div>
+          <div class="money-bar-container"><div class="money-bar-fill" style="width: 100%;"></div></div>
+
+          <div class="money-row">
+            <span class="money-industry">Republican/Conservative</span>
+            <span class="money-amount">$2.56M</span>
+          </div>
+          <div class="money-bar-container"><div class="money-bar-fill" style="width: 72%;"></div></div>
+
+          <div class="money-row">
+            <span class="money-industry">Securities & Investment</span>
+            <span class="money-amount">$833K</span>
+          </div>
+          <div class="money-bar-container"><div class="money-bar-fill" style="width: 23%;"></div></div>
+
+          <div class="money-row">
+            <span class="money-industry">Real Estate</span>
+            <span class="money-amount">$738K</span>
+          </div>
+          <div class="money-bar-container"><div class="money-bar-fill" style="width: 21%;"></div></div>
+
+          <div class="money-row">
+            <span class="money-industry">Oil & Gas</span>
+            <span class="money-amount">$293K</span>
+          </div>
+          <div class="money-bar-container"><div class="money-bar-fill" style="width: 8%;"></div></div>
+
+          <div style="margin-top: 12px; text-align: center;">
+            <a href="#" class="read-more" style="font-size: 0.8rem;">Full Money Trail &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Votes -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">Recent Votes</div>
+        <div class="sidebar-card-body">
+          <div class="vote-item">
+            <div>
+              <span class="vote-bill">S. 4361 — Border Security Act</span>
+              <span class="vote-result vote-no">NO</span>
+            </div>
+            <div class="vote-desc">Bipartisan bill to add 1,500 border agents</div>
+          </div>
+          <div class="vote-item">
+            <div>
+              <span class="vote-bill">S. 2024 — Big Tech Antitrust</span>
+              <span class="vote-result vote-yes">YES</span>
+            </div>
+            <div class="vote-desc">Break up monopolistic tech companies</div>
+          </div>
+          <div class="vote-item">
+            <div>
+              <span class="vote-bill">H.R. 8800 — Debt Ceiling</span>
+              <span class="vote-result vote-no">NO</span>
+            </div>
+            <div class="vote-desc">Raise debt ceiling to avoid default</div>
+          </div>
+          <div style="margin-top: 12px; text-align: center;">
+            <a href="#" class="read-more" style="font-size: 0.8rem;">Full Voting Record &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Missouri Watch Teaser -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header red-bg">Missouri Watch</div>
+        <div class="sidebar-card-body">
+          <p style="font-size: 0.85rem; color: var(--gray-700); margin-bottom: 12px;">
+            We're expanding accountability beyond Hawley. Coming soon:
+          </p>
+          <div style="font-size: 0.85rem; line-height: 2;">
+            <strong>Sen. Eric Schmitt</strong> &mdash; U.S. Senator<br>
+            <strong>Denny Hoskins</strong> &mdash; Secretary of State<br>
+            <strong>Gov. Mike Kehoe</strong> &mdash; Governor
+          </div>
+          <div style="margin-top: 12px; text-align: center;">
+            <a href="#" class="read-more" style="font-size: 0.8rem;">Learn More &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-section">
+        <h3>About This Site</h3>
+        <p>
+          Hawley Watch is an independent political accountability project. We fact-check Senator Josh Hawley's public statements, track his campaign finance data, and connect his words to his voting record. We are not affiliated with any political campaign, party, or organization.
+        </p>
+      </div>
+      <div class="footer-section">
+        <h3>Data Sources</h3>
+        <ul class="footer-links">
+          <li><a href="#">PolitiFact</a></li>
+          <li><a href="#">OpenSecrets.org</a></li>
+          <li><a href="#">FEC.gov</a></li>
+          <li><a href="#">GovTrack.us</a></li>
+          <li><a href="#">Congress.gov</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Navigate</h3>
+        <ul class="footer-links">
+          <li><a href="#">Hawley Watch</a></li>
+          <li><a href="#">Money Trail</a></li>
+          <li><a href="#">Voting Record</a></li>
+          <li><a href="#">Missouri Watch</a></li>
+          <li><a href="#">About / Methodology</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Hawley Watch. All rights reserved. This is an independent accountability project protected by the First Amendment.
+    </div>
+  </footer>
+
+</body>
+</html>
