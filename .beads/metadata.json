@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "server",
+  "dolt_database": "hawleywatch_site",
+  "project_id": "beb3ed17-3399-408e-8e54-7475c96abc4f"
+}
