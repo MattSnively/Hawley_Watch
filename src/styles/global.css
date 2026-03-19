@@ -125,6 +125,78 @@
 }
 
 /* -----------------------------------------------------------------------------
+   Prose overrides: post detail page typography and spacing
+   ----------------------------------------------------------------------------- */
+@layer components {
+  /* Blockquotes — colored left border with generous padding and background */
+  .prose blockquote {
+    @apply border-l-4 border-flag-blue bg-gray-50 px-6 py-4 my-8;
+    font-style: normal;
+  }
+
+  /* Blockquote paragraphs — tighten internal spacing */
+  .prose blockquote p {
+    @apply my-1;
+  }
+
+  /* Attribution lines inside blockquotes — colored circle bullet instead of em-dash */
+  .prose blockquote p:last-child {
+    @apply text-sm text-neutral-500 mt-3;
+  }
+
+  /* Replace em-dash attribution with colored circle bullet */
+  .prose blockquote p:last-child::before {
+    content: '';
+    display: none;
+  }
+
+  /* Section headings (h2) — add breathing room between sections */
+  .prose h2 {
+    @apply mt-12 mb-4 pt-6 border-t-2 border-neutral-200;
+  }
+
+  /* First h2 after the header shouldn't have a top border */
+  .prose > .not-prose + h2,
+  .prose > h2:first-child {
+    @apply mt-0 pt-0 border-t-0;
+  }
+
+  /* Section sub-headings (h3) — space within sections */
+  .prose h3 {
+    @apply mt-8 mb-3;
+  }
+
+  /* Tables — clean borders and padding */
+  .prose table {
+    @apply my-8;
+  }
+  .prose th {
+    @apply bg-flag-blue text-white text-left px-4 py-2 text-sm font-bold uppercase tracking-wide;
+  }
+  .prose td {
+    @apply px-4 py-3 border-b border-neutral-200 text-sm;
+  }
+
+  /* Horizontal rules — subtle section dividers with spacing */
+  .prose hr {
+    @apply my-10 border-neutral-200;
+  }
+
+  /* Ordered and unordered lists — breathing room */
+  .prose ul, .prose ol {
+    @apply my-6;
+  }
+  .prose li {
+    @apply my-2;
+  }
+
+  /* Bold verdict labels in fact-check tables */
+  .prose td strong {
+    @apply text-neutral-900;
+  }
+}
+
+/* -----------------------------------------------------------------------------
    Utility layer: one-off helpers Tailwind doesn't cover
    ----------------------------------------------------------------------------- */
 @layer utilities {

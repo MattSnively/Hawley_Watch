@@ -25,6 +25,7 @@
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/tailwind": "^6.0.2",
+    "@tailwindcss/typography": "^0.5.19",
     "astro": "^5.18.0",
     "astro-seo": "^1.1.0",
     "playwright": "^1.58.2",
