@@ -31,7 +31,7 @@ sources:
   - "5Calls.org"
 relatedDonors: []
 relatedVotes: ["SAVE Act (H.R. 22) — House vote April 10, 2025: 220-208", "SAVE America Act — House vote February 11, 2026: 218-213"]
-excerpt: "Hawley went on Hannity three times in one night to push the SAVE Act as 'voter ID.' But the SAVE Act doesn't require showing ID at the polls — it requires documentary proof of citizenship to register. That's a fundamentally different thing, and framing it as 'voter ID' borrows the popularity of one concept to sell another."
+excerpt: "Hawley went on Hannity to push the SAVE Act as 'voter ID,' posting three clips from the appearance. But the SAVE Act doesn't require showing ID at the polls — it requires documentary proof of citizenship to register. That's a fundamentally different thing, and framing it as 'voter ID' borrows the popularity of one concept to sell another."
 ---
 
 ## The Statements
