@@ -97,6 +97,8 @@
   .topic-badge-healthcare { background-color: #059669; }
   .topic-badge-foreign-policy { background-color: #4338CA; }
   .topic-badge-missouri { background-color: #9333EA; }
+  .topic-badge-voting { background-color: #1D4ED8; }
+  .topic-badge-elections { background-color: #6D28D9; }
 
   /* Vote result badges */
   .vote-yes {

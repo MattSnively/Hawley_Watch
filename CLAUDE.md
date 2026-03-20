@@ -85,6 +85,7 @@ Scores are based on fact-checks from:
 - Data integration: Build-time stats computed from JSON data files
 - Build: `npm run build` generates 11 static pages
 - Hosting: Not yet deployed (configured for Cloudflare Pages / Netlify)
+- Skills installed: `seo-audit`, `playwright-best-practices`, `copywriting` (via skills.sh, in `.agents/skills/`)
 
 ---
 
@@ -110,6 +111,8 @@ Posts should be tagged with topics (used for topic-badge CSS classes):
 - culture-war
 - foreign-policy
 - missouri
+- voting
+- elections
 
 ---
 
@@ -134,4 +137,4 @@ Posts should be tagged with topics (used for topic-badge CSS classes):
 
 ---
 
-*Last Updated: February 2026*
+*Last Updated: March 2026*
