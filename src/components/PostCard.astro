@@ -22,6 +22,7 @@ interface Props {
       truthScore?: number;
       rating?: string;
       tweetUrl?: string;
+      tweetQuote?: string;
       excerpt?: string;
       sources?: string[];
     };
@@ -62,12 +63,13 @@ const sourcesText = data.sources?.length
     </div>
   </div>
 
-  <!-- Simulated tweet embed (for Hawley posts with tweet data) -->
-  {data.tweetUrl && (
+  <!-- Simulated tweet embed — uses tweetQuote (verbatim tweet text) if available;
+       falls back to empty so the embed isn't populated with analysis copy -->
+  {data.tweetUrl && data.tweetQuote && (
     <TweetEmbed
       name="Josh Hawley"
       handle="@HawleyMO"
-      body={data.excerpt || ''}
+      body={data.tweetQuote}
       date={displayDate}
     />
   )}

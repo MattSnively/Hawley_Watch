@@ -6,6 +6,7 @@ topic: ["healthcare"]
 politician: "josh-hawley"
 tweetUrl: "https://x.com/HawleyMO/status/1909700000000000000"
 tweetScreenshot: "/assets/tweets/2026-04-08-hawley-planned-parenthood-medicaid.png"
+tweetQuote: "This would be a massive betrayal. Under no circumstance can Planned Parenthood be allowed to get taxpayer money for their abortions and gender transition insanity. Period."
 truthScore: 20
 factualAccuracy: 15
 intentToMislead: 10

@@ -23,6 +23,8 @@ const posts = defineCollection({
     // Tweet reference data
     tweetUrl: z.string().optional(),
     tweetScreenshot: z.string().optional(),
+    // Verbatim quote shown in the tweet embed on post cards
+    tweetQuote: z.string().optional(),
     // Receipt card image path (for shareable contradiction cards)
     receiptCard: z.string().optional(),
     // Truth Score breakdown (0-100 scale)

@@ -6,6 +6,7 @@ topic: ["tech", "economy"]
 politician: "josh-hawley"
 tweetUrl: "https://x.com/HawleyMO"
 tweetScreenshot: "/assets/tweets/2026-03-30-hawley-big-tech-liability.png"
+tweetQuote: "Congress needs to pass my legislation empowering victims and parents to sue Big Tech"
 truthScore: 72
 factualAccuracy: 78
 intentToMislead: 75

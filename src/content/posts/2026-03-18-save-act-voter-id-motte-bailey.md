@@ -6,6 +6,7 @@ topic: ["democracy", "voting", "elections"]
 politician: "josh-hawley"
 tweetUrl: "https://x.com/HawleyMO"
 tweetScreenshot: "/assets/tweets/2026-03-18-hawley-save-act-voter-id.png"
+tweetQuote: "The Supreme Court already ruled that voter ID is constitutional. We enacted it in Missouri; we should enact it nationwide."
 truthScore: 30
 factualAccuracy: 38
 intentToMislead: 28

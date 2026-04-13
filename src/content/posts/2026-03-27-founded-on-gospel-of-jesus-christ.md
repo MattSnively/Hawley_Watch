@@ -6,6 +6,7 @@ topic: ["culture-war", "democracy", "elections"]
 politician: "josh-hawley"
 tweetUrl: "https://x.com/HawleyMO"
 tweetScreenshot: "/assets/tweets/2026-03-27-hawley-founded-on-gospel.png"
+tweetQuote: "This nation was not founded on some set of neutral, liberal principles. It was founded on the Gospel of Jesus Christ."
 truthScore: 15
 factualAccuracy: 12
 intentToMislead: 30

@@ -6,6 +6,7 @@ topic: ["culture-war", "economy"]
 politician: "josh-hawley"
 tweetUrl: "https://x.com/HawleyMO/status/example001"
 tweetScreenshot: "/assets/tweets/2026-01-13-trans-athletes.png"
+tweetQuote: "Democrats were at the U.S. Supreme Court today pushing for men in women's sports. Meanwhile, President Trump is working to cap credit card rates and stop Wall Street from buying up single-family homes. The Left just doesn't get it"
 truthScore: 30
 factualAccuracy: 45
 intentToMislead: 20
