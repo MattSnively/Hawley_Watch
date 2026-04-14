@@ -37,8 +37,14 @@ export function getDonorIndustry(name: string) {
 /**
  * Compute aggregate stats from the tweet archive and content collections.
  * Returns the four key metrics displayed in the StatsDashboard.
+ *
+ * @param posts   - Published post collection entries (receipts, credit posts, noise)
+ * @param credits - "Credit Where It's Due" collection entries; counted toward consistent positions
  */
-export function computeStats(posts?: Array<{ data: { bucket?: string; truthScore?: number; draft?: boolean } }>) {
+export function computeStats(
+  posts?: Array<{ data: { bucket?: string; truthScore?: number; draft?: boolean } }>,
+  credits?: Array<unknown>,
+) {
   // Count tweets by bucket from the tweet archive
   const allTweets = tweetData.tweets;
   const receiptCount = allTweets.filter((t) => t.bucket === 'receipt').length;
@@ -58,6 +64,18 @@ export function computeStats(posts?: Array<{ data: { bucket?: string; truthScore
     receipts = published.filter((p) => p.data.bucket === 'receipt').length + receiptCount;
     noise = published.filter((p) => p.data.bucket === 'noise').length + noiseCount;
     total = consistent + receipts + noise;
+  }
+
+  // Add credit collection entries to the consistent count.
+  // These are documented consistent positions that may not have a matching post yet.
+  // Avoid double-counting: only add entries beyond what's already covered by bucket:'credit' posts.
+  if (credits && credits.length > 0) {
+    const postCreditCount = posts
+      ? posts.filter((p) => !p.data.draft && p.data.bucket === 'credit').length
+      : 0;
+    const extraCredits = Math.max(0, credits.length - postCreditCount);
+    consistent += extraCredits;
+    total += extraCredits;
   }
 
   // Calculate consistency ratio

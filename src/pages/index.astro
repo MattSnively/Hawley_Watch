@@ -29,8 +29,10 @@ const sortedPosts = allPosts.sort(
 // Load credit entries for sidebar widget
 const creditEntries = await getCollection('credit');
 
-// Compute aggregate stats for the dashboard
-const stats = computeStats(allPosts);
+// Compute aggregate stats for the dashboard.
+// Pass creditEntries so the consistency ratio counts all documented consistent positions,
+// not just the subset that have a full bucket:'credit' post written yet.
+const stats = computeStats(allPosts, creditEntries);
 
 // Latest post for the ticker bar
 const latestPost = sortedPosts[0];
