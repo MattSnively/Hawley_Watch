@@ -42,8 +42,6 @@ const postUrl = data.politician === 'josh-hawley'
   ? `/hawley-watch/${post.slug}`
   : `/missouri-watch/${post.slug}`;
 
-/** Source count for the card footer — full source list lives on the post page */
-const sourceCount = data.sources?.length ?? 0;
 ---
 
 <article class="border border-neutral-200 mb-6 bg-white">
@@ -91,11 +89,8 @@ const sourceCount = data.sources?.length ?? 0;
     )}
   </div>
 
-  <!-- Footer: read more link and source count -->
-  <div class="px-5 py-3 border-t border-neutral-100 flex justify-between items-center">
+  <!-- Footer: read more link -->
+  <div class="px-5 py-3 border-t border-neutral-100">
     <a href={postUrl} class="read-more">Read Full Analysis &rarr;</a>
-    {sourceCount > 0 && (
-      <span class="text-xs text-neutral-400">{sourceCount} source{sourceCount !== 1 ? 's' : ''}</span>
-    )}
   </div>
 </article>
