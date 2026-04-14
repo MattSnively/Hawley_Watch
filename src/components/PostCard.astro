@@ -42,10 +42,8 @@ const postUrl = data.politician === 'josh-hawley'
   ? `/hawley-watch/${post.slug}`
   : `/missouri-watch/${post.slug}`;
 
-/** Sources display string */
-const sourcesText = data.sources?.length
-  ? `Sources: ${data.sources.join(', ')}`
-  : '';
+/** Source count for the card footer — full source list lives on the post page */
+const sourceCount = data.sources?.length ?? 0;
 ---
 
 <article class="border border-neutral-200 mb-6 bg-white">
@@ -93,11 +91,11 @@ const sourcesText = data.sources?.length
     )}
   </div>
 
-  <!-- Footer: read more link and sources -->
+  <!-- Footer: read more link and source count -->
   <div class="px-5 py-3 border-t border-neutral-100 flex justify-between items-center">
     <a href={postUrl} class="read-more">Read Full Analysis &rarr;</a>
-    {sourcesText && (
-      <span class="text-xs text-neutral-500">{sourcesText}</span>
+    {sourceCount > 0 && (
+      <span class="text-xs text-neutral-400">{sourceCount} source{sourceCount !== 1 ? 's' : ''}</span>
     )}
   </div>
 </article>
