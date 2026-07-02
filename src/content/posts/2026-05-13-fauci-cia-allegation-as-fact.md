@@ -4,7 +4,7 @@ date: "2026-05-13"
 bucket: "receipt"
 topic: ["healthcare", "democracy"]
 politician: "josh-hawley"
-tweetUrl: "https://x.com/HawleyMO"
+tweetUrl: "https://x.com/HawleyMO/status/2054654219412484254"
 tweetScreenshot: "/assets/tweets/2026-05-13-hawley-fauci-cia-indicted.png"
 tweetQuote: "Anthony Fauci lied about COVID's origins and then intervened behind the scenes to get the CIA to change their findings. He should be indicted"
 truthScore: 35
