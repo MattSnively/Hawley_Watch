@@ -4,7 +4,7 @@ date: "2026-05-05"
 bucket: "receipt"
 topic: ["culture-war", "democracy"]
 politician: "josh-hawley"
-tweetUrl: "https://x.com/HawleyMO"
+tweetUrl: "https://x.com/HawleyMO/status/2051727618794205252"
 tweetScreenshot: "/assets/tweets/2026-05-05-hawley-founded-gospel-repeat.png"
 tweetQuote: "This country was founded on the gospel of Jesus Christ"
 truthScore: 12
